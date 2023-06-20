@@ -1,13 +1,11 @@
-package ru.opencode.bankinfo.mapper;
+package ru.opencode.bankinfo.manuals.mapper;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import ru.opencode.bankinfo.dto.InfoDTO;
-import ru.opencode.bankinfo.dto.ManualDTO;
-import ru.opencode.bankinfo.entity.Info;
-import ru.opencode.bankinfo.entity.Manual;
+import ru.opencode.bankinfo.manuals.dto.ManualDTO;
+import ru.opencode.bankinfo.manuals.entity.Manual;
 
 import java.util.List;
 

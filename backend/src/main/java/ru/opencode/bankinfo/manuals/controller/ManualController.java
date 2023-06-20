@@ -1,13 +1,12 @@
-package ru.opencode.bankinfo.controller;
+package ru.opencode.bankinfo.manuals.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ru.opencode.bankinfo.dto.InfoDTO;
-import ru.opencode.bankinfo.dto.ManualDTO;
-import ru.opencode.bankinfo.mapper.ManualMapper;
-import ru.opencode.bankinfo.service.ManualService;
+import ru.opencode.bankinfo.manuals.dto.ManualDTO;
+import ru.opencode.bankinfo.manuals.mapper.ManualMapper;
+import ru.opencode.bankinfo.manuals.service.ManualService;
 
 import java.util.List;
 

@@ -1,12 +1,7 @@
-package ru.opencode.bankinfo.dto;
+package ru.opencode.bankinfo.manuals.dto;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-import ru.opencode.bankinfo.entity.Info;
 
 import java.time.LocalDateTime;
 @Data

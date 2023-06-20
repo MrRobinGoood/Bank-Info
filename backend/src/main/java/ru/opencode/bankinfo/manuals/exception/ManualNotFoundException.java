@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.exception;
+package ru.opencode.bankinfo.manuals.exception;
 
 public class ManualNotFoundException extends ManualException{
     public ManualNotFoundException(String message) {

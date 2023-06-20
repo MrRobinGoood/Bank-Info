@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.dto;
+package ru.opencode.bankinfo.manuals.dto;
 
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;

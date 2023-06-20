@@ -1,6 +1,5 @@
-package ru.opencode.bankinfo.entity;
+package ru.opencode.bankinfo.manuals.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

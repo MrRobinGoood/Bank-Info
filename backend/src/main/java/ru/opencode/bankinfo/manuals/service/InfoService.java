@@ -1,12 +1,12 @@
-package ru.opencode.bankinfo.service;
+package ru.opencode.bankinfo.manuals.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.opencode.bankinfo.dto.InfoDTO;
-import ru.opencode.bankinfo.entity.Info;
-import ru.opencode.bankinfo.exception.InfoNotFoundException;
-import ru.opencode.bankinfo.mapper.InfoMapper;
-import ru.opencode.bankinfo.repository.InfoRepository;
+import ru.opencode.bankinfo.manuals.dto.InfoDTO;
+import ru.opencode.bankinfo.manuals.entity.Info;
+import ru.opencode.bankinfo.manuals.exception.InfoNotFoundException;
+import ru.opencode.bankinfo.manuals.mapper.InfoMapper;
+import ru.opencode.bankinfo.manuals.repository.InfoRepository;
 
 import java.util.List;
 
