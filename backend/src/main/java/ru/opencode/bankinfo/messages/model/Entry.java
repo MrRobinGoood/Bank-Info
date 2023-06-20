@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.model.main;
+package ru.opencode.bankinfo.messages.model;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -34,10 +34,10 @@ public class Entry {
     @Column(nullable = false)
     private Participant participant;
 
-    @OneToMany(mappedBy = "entry")
+    @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<SWBIC> swbics;
 
-    @OneToMany(mappedBy = "entry")
+    @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<Account> accounts;
 
     private Boolean isDeleted = false;

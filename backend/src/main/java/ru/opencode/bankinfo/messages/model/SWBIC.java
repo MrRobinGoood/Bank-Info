@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.model.main;
+package ru.opencode.bankinfo.messages.model;
 
 import jakarta.persistence.*;
 import lombok.*;

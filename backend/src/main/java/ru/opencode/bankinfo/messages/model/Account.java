@@ -1,20 +1,18 @@
-package ru.opencode.bankinfo.model.main;
+package ru.opencode.bankinfo.messages.model;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Set;
 
 @Entity
-@Table(name = "EMessages"/*, schema = "main"*/)
+@Table(name = "Accounts"/*, schema = "main"*/)
 @RequiredArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class EMessageEntity {
+public class Account {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,37 +20,39 @@ public class EMessageEntity {
     @Setter(AccessLevel.PRIVATE)
     private Integer id;
 
-    @NonNull
-    @OneToMany(mappedBy = "message")
-    private Set<Entry> entries;
+    @ManyToOne
+    @JoinColumn(name = "entry_id", nullable = false)
+    private Entry entry;
 
     @NonNull
     @Column(nullable = false)
-    private Long edNo;
+    private String account;
 
     @NonNull
     @Column(nullable = false)
-    private LocalDate edDate;
+    private String regulationAccountType;
 
     @NonNull
     @Column(nullable = false)
-    private Long edAuthor;
+    private Byte controlKey;
 
     @NonNull
     @Column(nullable = false)
-    private String creationReason;
+    private String accountCBRBIC;
 
     @NonNull
     @Column(nullable = false)
-    private LocalDateTime creationTime;
+    private LocalDate dateIn;
+
+    private LocalDate dateOut;
 
     @NonNull
     @Column(nullable = false)
-    private String infoTypeCode;
+    private String accountStatus;
 
-    @NonNull
-    @Column(nullable = false)
-    private LocalDate businessDay;
+    private String AccRstr;
+
+    private LocalDate AccRstrDate;
 
     private Boolean isDeleted = false;
 }
