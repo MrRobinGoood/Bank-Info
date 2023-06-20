@@ -9,6 +9,7 @@ import ru.opencode.bankinfo.manuals.mapper.ManualMapper;
 import ru.opencode.bankinfo.manuals.service.ManualService;
 
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -25,8 +26,13 @@ public class ManualController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{id}/manuals")
-    public List<ManualDTO> getManualsByInfoId(@PathVariable(value = "id") Long infoId) {
-        return manualMapper.manualsToDTO(manualService.getManualsByInfoId(infoId));
+    public List<ManualDTO> getManualsByInfoId(@PathVariable(value = "id") Long infoId,
+                                              @RequestParam(defaultValue = "0", name = "page") Integer pageNo,
+                                              @RequestParam(defaultValue = "10", name = "size") Integer pageSize,
+                                              @RequestParam(defaultValue = "id") String sortBy)
+
+                                               {
+        return manualMapper.manualsToDTO(manualService.getManualsByInfoId(infoId, pageNo,pageSize, sortBy));
     }
 
     @ResponseStatus(HttpStatus.CREATED)

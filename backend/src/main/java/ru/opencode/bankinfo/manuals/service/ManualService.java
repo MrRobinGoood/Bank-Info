@@ -1,6 +1,11 @@
 package ru.opencode.bankinfo.manuals.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.opencode.bankinfo.manuals.dto.ManualDTO;
 import ru.opencode.bankinfo.manuals.entity.Info;
@@ -14,6 +19,7 @@ import java.util.List;
 @Service
 public class ManualService {
     private ManualRepository manualRepository;
+
     private ManualMapper manualMapper;
     private InfoService infoService;
 
@@ -32,9 +38,12 @@ public class ManualService {
         return manualRepository.findAll();
     }
 
-    public List<Manual> getManualsByInfoId(Long infoId) {
+    //TODO pageNo/pageSize must be greater than zero, sort default type
+    public List<Manual> getManualsByInfoId(Long infoId, Integer pageNo, Integer pageSize, String sortBy) {
         Info info = infoService.getInfo(infoId);
-        return info.getManuals();
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by(sortBy));
+        Page<Manual> manualPage = manualRepository.findByInfo_id(infoId, pageable);
+        return manualPage.getContent();
     }
 
     public void addManual(Manual manual, Long infoId) {

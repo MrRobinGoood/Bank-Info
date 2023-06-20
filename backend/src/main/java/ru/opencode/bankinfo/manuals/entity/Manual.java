@@ -5,18 +5,20 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-
-@Data
 @Table(name = "manuals")
 @Entity
+@RequiredArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@ToString
 public class Manual {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @EqualsAndHashCode.Include
+    @Setter(AccessLevel.PRIVATE)
     private Long id;
+
     @Column(nullable = false)
     private String code;
     @Column(nullable = false)
