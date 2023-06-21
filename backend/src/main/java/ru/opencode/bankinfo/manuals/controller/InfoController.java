@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.opencode.bankinfo.manuals.dto.InfoCreationDTO;
+import ru.opencode.bankinfo.manuals.dto.PaginatedResponseDTO;
 import ru.opencode.bankinfo.manuals.entity.Info;
 import ru.opencode.bankinfo.manuals.mapper.InfoMapper;
 import ru.opencode.bankinfo.manuals.service.InfoService;
@@ -27,8 +28,13 @@ public class InfoController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping()
-    public List<Info> getAllInfo() {
-        return infoService.getAllInfo();
+    public PaginatedResponseDTO getAllInfo(@RequestParam(defaultValue = "1", name = "page") Integer pageNo,
+                                 @RequestParam(defaultValue = "10", name = "size") Integer pageSize,
+                                 @RequestParam(defaultValue = "", name = "name") String name,
+                                 @RequestParam(defaultValue = "false", name = "deleted") Boolean isDeleted) {
+
+        List<Object> infoPageWithPaginateConfig = infoService.getAllInfo(name, isDeleted, pageNo,pageSize);
+        return new PaginatedResponseDTO(infoPageWithPaginateConfig.get(0), infoPageWithPaginateConfig.get(1));
     }
 
     @ResponseStatus(HttpStatus.CREATED)
