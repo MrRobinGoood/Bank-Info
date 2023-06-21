@@ -7,7 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import ru.opencode.bankinfo.manuals.dto.ManualDTO;
+import ru.opencode.bankinfo.manuals.dto.ManualCreationDTO;
 import ru.opencode.bankinfo.manuals.entity.Info;
 import ru.opencode.bankinfo.manuals.entity.Manual;
 import ru.opencode.bankinfo.manuals.exception.ManualNotFoundException;
@@ -39,10 +39,16 @@ public class ManualService {
     }
 
     //TODO pageNo/pageSize must be greater than zero, sort default type
-    public List<Manual> getManualsByInfoId(Long infoId, Integer pageNo, Integer pageSize, String sortBy) {
+    public List<Manual> getManualsByInfoId(Long infoId,Boolean isDeleted, String code, String description, Integer pageNo, Integer pageSize) {
         Info info = infoService.getInfo(infoId);
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by(sortBy));
-        Page<Manual> manualPage = manualRepository.findByInfo_id(infoId, pageable);
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by("id"));
+        Page<Manual> manualPage = manualRepository.findByInfo_idAndIsDeletedEqualsAndCodeContainsAndDescriptionContains(
+                infoId,
+                isDeleted,
+                code,
+                description,
+                pageable
+        );
         return manualPage.getContent();
     }
 
@@ -52,9 +58,9 @@ public class ManualService {
         manualRepository.save(manual);
     }
 
-    public void updateManual(ManualDTO manualDTO) {
-        Manual manual = getManual(manualDTO.getId());
-        manualMapper.updateManualFromDTO(manualDTO, manual);
+    public void updateManual(Long id, ManualCreationDTO manualCreationDTO) {
+        Manual manual = getManual(id);
+        manualMapper.updateManualFromManualCreationDTO(manualCreationDTO, manual);
         manualRepository.save(manual);
     }
 

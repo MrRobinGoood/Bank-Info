@@ -2,7 +2,7 @@ package ru.opencode.bankinfo.manuals.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.opencode.bankinfo.manuals.dto.InfoDTO;
+import ru.opencode.bankinfo.manuals.dto.InfoCreationDTO;
 import ru.opencode.bankinfo.manuals.entity.Info;
 import ru.opencode.bankinfo.manuals.exception.InfoNotFoundException;
 import ru.opencode.bankinfo.manuals.mapper.InfoMapper;
@@ -33,12 +33,11 @@ public class InfoService {
         infoRepository.save(info);
     }
 
-    public void updateInfo(InfoDTO infoDTO) {
-        Info info = getInfo(infoDTO.getId());
-        infoMapper.updateInfoFromDTO(infoDTO, info);
+    public void updateInfo(Long id, InfoCreationDTO infoCreationDTO) {
+        Info info = getInfo(id);
+        infoMapper.updateInfoFromInfoCreationDTO(infoCreationDTO, info);
         infoRepository.save(info);
     }
-
     public void deleteInfo(Long id) {
         Info info = getInfo(id);
         info.setIsDeleted(true);

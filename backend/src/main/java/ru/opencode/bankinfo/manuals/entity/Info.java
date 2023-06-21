@@ -1,5 +1,6 @@
 package ru.opencode.bankinfo.manuals.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -30,7 +31,8 @@ public class Info {
     @Column(name = "e_user")
     private Long eUser;
     @Column(name = "is_deleted", columnDefinition = "boolean default false")
-    private Boolean isDeleted;
+    private Boolean isDeleted = false;
+    @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "info")
     private List<Manual> manuals;
 }

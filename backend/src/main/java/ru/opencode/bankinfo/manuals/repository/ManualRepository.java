@@ -10,5 +10,6 @@ import java.util.List;
 
 @Repository
 public interface ManualRepository extends JpaRepository<Manual, Long> {
-    Page<Manual> findByInfo_id (Long id, Pageable pageable);
+    Page<Manual> findByInfo_idAndIsDeletedEqualsAndCodeContainsAndDescriptionContains(Long id, Boolean isDeleted, String code, String description, Pageable pageable);
+
 }
