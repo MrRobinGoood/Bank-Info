@@ -1,9 +1,11 @@
 package ru.opencode.bankinfo.manuals.dto;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
+import lombok.*;
 
-@Data
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class InfoCreationDTO {
     @NotNull
     private String name;
