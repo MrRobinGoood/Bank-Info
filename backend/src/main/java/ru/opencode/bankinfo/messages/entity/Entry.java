@@ -1,6 +1,8 @@
-package ru.opencode.bankinfo.messages.model;
+package ru.opencode.bankinfo.messages.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.Set;
@@ -21,15 +23,19 @@ public class Entry {
     private Integer id;
 
     @NonNull
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "message_id", nullable = false)
     private EMessageEntity message;
 
     @NonNull
+    @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String BIC;
 
     @NonNull
+    @NotNull
     @Embedded
     @Column(nullable = false)
     private Participant participant;

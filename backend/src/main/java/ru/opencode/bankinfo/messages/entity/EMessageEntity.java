@@ -1,6 +1,9 @@
-package ru.opencode.bankinfo.messages.model;
+package ru.opencode.bankinfo.messages.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -23,34 +26,45 @@ public class EMessageEntity {
     private Integer id;
 
     @NonNull
+    @NotNull
+    @NotEmpty
     @OneToMany(mappedBy = "message", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<Entry> entries;
 
     @NonNull
+    @NotNull
     @Column(nullable = false)
     private Long edNo;
 
     @NonNull
+    @NotNull
     @Column(nullable = false)
     private LocalDate edDate;
 
     @NonNull
+    @NotNull
     @Column(nullable = false)
     private Long edAuthor;
 
     @NonNull
+    @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String creationReason;
 
     @NonNull
+    @NotNull
     @Column(nullable = false)
     private LocalDateTime creationTime;
 
     @NonNull
+    @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String infoTypeCode;
 
     @NonNull
+    @NotNull
     @Column(nullable = false)
     private LocalDate businessDay;
 

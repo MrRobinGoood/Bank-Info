@@ -1,6 +1,8 @@
-package ru.opencode.bankinfo.messages.model;
+package ru.opencode.bankinfo.messages.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -25,28 +27,38 @@ public class Account {
     private Entry entry;
 
     @NonNull
+    @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String account;
 
     @NonNull
+    @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String regulationAccountType;
 
     @NonNull
+    @NotNull
     @Column(nullable = false)
     private Byte controlKey;
 
     @NonNull
+    @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String accountCBRBIC;
 
     @NonNull
+    @NotNull
     @Column(nullable = false)
     private LocalDate dateIn;
 
     private LocalDate dateOut;
 
     @NonNull
+    @NotNull
+    @NotBlank
     @Column(nullable = false)
     private String accountStatus;
 
