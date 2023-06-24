@@ -4,19 +4,15 @@ import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
-import ru.opencode.bankinfo.manuals.dto.ManualDTO;
+import ru.opencode.bankinfo.manuals.dto.ManualCreationDTO;
 import ru.opencode.bankinfo.manuals.entity.Manual;
 
-import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface ManualMapper {
-    ManualDTO manualToDTO(Manual manual);
 
-    Manual dtoToManual(ManualDTO manualDTO);
-
-    List<ManualDTO> manualsToDTO(List<Manual> manuals);
+    Manual manualCreationDTOToManual(ManualCreationDTO createManualDTO);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateManualFromDTO(ManualDTO manualDTO, @MappingTarget Manual manual);
+    void updateManualFromManualCreationDTO(ManualCreationDTO manualCreationDTO, @MappingTarget Manual manual);
 }
