@@ -8,6 +8,7 @@ import lombok.*;
 @RequiredArgsConstructor
 public class InfoCreationDTO {
     @NotNull
+    @NonNull
     private String name;
 
 }
