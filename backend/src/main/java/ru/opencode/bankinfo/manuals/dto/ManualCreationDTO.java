@@ -8,9 +8,7 @@ import lombok.*;
 @RequiredArgsConstructor
 public class ManualCreationDTO {
     @NotNull
-    @NonNull
     private String code;
     @NotNull
-    @NonNull
     private String description;
 }
