@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.manuals.exception;
+package ru.opencode.bankinfo.core.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -6,18 +6,26 @@ import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import ru.opencode.bankinfo.manuals.exception.InfoNotFoundException;
+import ru.opencode.bankinfo.manuals.exception.ManualNotFoundException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-    @ExceptionHandler(InfoNotFoundException.class)
-    public ResponseEntity<?> handleBuildingNotFoundException(InfoNotFoundException e) {
+
+    @ExceptionHandler(ClassNotFoundException.class)
+    public ResponseEntity<?> handleBuildingNotFoundException(NotFoundException e) {
         return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
-    @ExceptionHandler(ManualNotFoundException.class)
-    public ResponseEntity<?> handleBuildingNotFoundException(ManualNotFoundException e) {
-        return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.NOT_FOUND);
-    }
+//    @ExceptionHandler(InfoNotFoundException.class)
+//    public ResponseEntity<?> handleBuildingNotFoundException(InfoNotFoundException e) {
+//        return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.NOT_FOUND);
+//    }
+//
+//    @ExceptionHandler(ManualNotFoundException.class)
+//    public ResponseEntity<?> handleBuildingNotFoundException(ManualNotFoundException e) {
+//        return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.NOT_FOUND);
+//    }
 
        @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
