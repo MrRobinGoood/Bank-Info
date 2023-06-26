@@ -17,15 +17,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 
-//    @ExceptionHandler(InfoNotFoundException.class)
-//    public ResponseEntity<?> handleBuildingNotFoundException(InfoNotFoundException e) {
-//        return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.NOT_FOUND);
-//    }
-//
-//    @ExceptionHandler(ManualNotFoundException.class)
-//    public ResponseEntity<?> handleBuildingNotFoundException(ManualNotFoundException e) {
-//        return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.NOT_FOUND);
-//    }
+    @ExceptionHandler(InfoNotFoundException.class)
+    public ResponseEntity<?> handleBuildingNotFoundException(InfoNotFoundException e) {
+        return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ManualNotFoundException.class)
+    public ResponseEntity<?> handleBuildingNotFoundException(ManualNotFoundException e) {
+        return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
 
        @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<?> handleMethodArgumentNotValidException(MethodArgumentNotValidException e) {
