@@ -55,4 +55,10 @@ public class InfoController {
     public void deleteInfo(@PathVariable(value = "id") Long id) {
         infoService.deleteInfo(id);
     }
+
+    @PatchMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void restoreInfo(@PathVariable(value = "id") Long id) {
+        infoService.restoreInfo(id);
+    }
 }

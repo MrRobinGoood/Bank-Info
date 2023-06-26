@@ -60,4 +60,13 @@ public class InfoService {
         }
         infoRepository.save(info);
     }
+
+    public void restoreInfo(Long id) {
+        Info info = getInfo(id);
+        info.setIsDeleted(false);
+        for (Manual manual : info.getManuals()) {
+            manual.setIsDeleted(false);
+        }
+        infoRepository.save(info);
+    }
 }

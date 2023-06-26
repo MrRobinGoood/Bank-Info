@@ -76,5 +76,11 @@ public class ManualService {
         manualRepository.save(manual);
     }
 
+    public void restoreManual(Long id) {
+        Manual manual = getManual(id);
+        manual.setIsDeleted(false);
+        manualRepository.save(manual);
+    }
+
 
 }
