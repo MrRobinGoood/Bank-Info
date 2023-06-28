@@ -2,7 +2,7 @@ version: '3'
 
 services:
   client:
-    image: 'robingoood/open-code-frontend:1.0'
+    image: 'robingoood/open-code-frontend:1.1'
     container_name: 'client-frontend'
     ports:
       - '3000:3000'
