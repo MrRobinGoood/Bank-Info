@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
+import ru.opencode.bankinfo.messages.entity.subClass.Audit;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -59,5 +60,6 @@ public class Account {
 
     private List<AccRstr> accRstrList;
 
-    private Boolean isDeleted = false;
+    @Embedded
+    private Audit auditFields;
 }

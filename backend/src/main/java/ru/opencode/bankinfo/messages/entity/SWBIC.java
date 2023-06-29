@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import ru.opencode.bankinfo.messages.entity.subClass.Audit;
 
 @Entity
 @Table(name = "SWBICS"/*, schema = "main"*/)
@@ -37,5 +38,6 @@ public class SWBIC {
     @Column(nullable = false)
     private Boolean defaultSWBIC;
 
-    private Boolean isDeleted = false;
+    @Embedded
+    private Audit auditFields;
 }

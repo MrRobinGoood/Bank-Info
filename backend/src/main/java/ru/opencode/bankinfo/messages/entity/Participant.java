@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import ru.opencode.bankinfo.messages.entity.subClass.Audit;
 import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
 
 import java.time.LocalDate;
@@ -77,7 +78,8 @@ public class Participant {
 
     private String participantStatus;
 
-    List<Rstr> rstrList;
+    private List<Rstr> rstrList;
 
-    private Boolean isDeletedP = false;
+    @Embedded
+    private Audit auditFieldsP;
 }

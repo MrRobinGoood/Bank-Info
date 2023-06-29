@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import ru.opencode.bankinfo.messages.entity.subClass.Audit;
 
 import java.util.Set;
 
@@ -48,5 +49,6 @@ public class Entry {
     @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<Account> accounts;
 
-    private Boolean isDeleted = false;
+    @Embedded
+    private Audit auditFields;
 }

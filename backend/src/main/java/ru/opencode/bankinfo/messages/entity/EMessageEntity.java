@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import ru.opencode.bankinfo.messages.entity.subClass.Audit;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -69,5 +70,6 @@ public class EMessageEntity {
     @Column(nullable = false)
     private LocalDate businessDay;
 
-    private Boolean isDeleted = false;
+    @Embedded
+    private Audit auditFields;
 }
