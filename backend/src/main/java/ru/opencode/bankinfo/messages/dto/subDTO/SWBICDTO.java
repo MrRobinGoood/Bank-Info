@@ -9,9 +9,6 @@ import ru.opencode.bankinfo.messages.entity.Entry;
 public class SWBICDTO {
 
     @NonNull
-    private Long id;
-
-    @NonNull
     private Entry entry;
 
     @NonNull

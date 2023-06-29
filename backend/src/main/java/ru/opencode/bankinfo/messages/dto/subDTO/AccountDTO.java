@@ -1,18 +1,17 @@
 package ru.opencode.bankinfo.messages.dto.subDTO;
 
+import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NonNull;
 import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
+import ru.opencode.bankinfo.messages.entity.subClass.Audit;
 
 import java.time.LocalDate;
 import java.util.List;
 
 @Data
 public class AccountDTO {
-
-    @NonNull
-    private Long id;
 
     @NonNull
     @NotBlank
@@ -38,5 +37,6 @@ public class AccountDTO {
 
     private List<AccRstr> accRstrList;
 
-    private Boolean isDeleted;
+    @Embedded
+    private Audit auditFields;
 }

@@ -1,19 +1,20 @@
 package ru.opencode.bankinfo.messages.dto.subDTO;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import ru.opencode.bankinfo.messages.entity.subClass.Audit;
 import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 
 @Data
 public class EntryDTO {
-
-    @NonNull
-    private Long id;
     
     @NonNull
     @NotBlank
@@ -67,11 +68,22 @@ public class EntryDTO {
 
     List<Rstr> rstrList;
 
-    private Boolean isDeletedP;
+    private Boolean isDeletedP = false;
+
+    @NonNull
+    private Long createdByP;
+
+    @NonNull
+    private LocalDateTime createDateTimeP;
+
+    private Long changeByP;
+
+    private LocalDateTime changeDateTimeP;
     
     private Set<SWBICDTO> swbics;
     
     private Set<AccountDTO> accounts;
 
-    private Boolean isDeleted;
+    @Embedded
+    private Audit auditFields;
 }
