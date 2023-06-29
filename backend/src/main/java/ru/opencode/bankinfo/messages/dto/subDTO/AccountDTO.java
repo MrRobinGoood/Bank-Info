@@ -1,53 +1,42 @@
 package ru.opencode.bankinfo.messages.dto.subDTO;
 
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NonNull;
+import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 public class AccountDTO {
 
     @NonNull
-    @NotNull
-    private Integer id;
+    private Long id;
 
     @NonNull
-    @NotNull
     @NotBlank
     private String account;
 
     @NonNull
-    @NotNull
     @NotBlank
     private String regulationAccountType;
 
-    @NonNull
-    @NotNull
     private Byte controlKey;
 
     @NonNull
-    @NotNull
     @NotBlank
     private String accountCBRBIC;
 
     @NonNull
-    @NotNull
     @NotBlank
     private LocalDate dateIn;
 
     private LocalDate dateOut;
 
-    @NonNull
-    @NotNull
-    @NotBlank
     private String accountStatus;
 
-    private String AccRstr;
-
-    private LocalDate AccRstrDate;
+    private List<AccRstr> accRstrList;
 
     private Boolean isDeleted;
 }

@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NonNull;
+import ru.opencode.bankinfo.messages.dto.subDTO.EntryDTO;
 import ru.opencode.bankinfo.messages.entity.Entry;
 
 import java.time.LocalDate;
@@ -15,42 +16,35 @@ import java.util.Set;
 public class MessageDTO {
 
     @NonNull
-    @NotNull
-    private Integer id;
+    private Long id;
+
+    private String eMessageName;
+
+    private Set<EntryDTO> entries;
 
     @NonNull
-    @NotNull
-    @NotEmpty
-    private Set<Entry> entries;
-
-    @NonNull
-    @NotNull
     private Long edNo;
 
     @NonNull
-    @NotNull
     private LocalDate edDate;
 
     @NonNull
-    @NotNull
     private Long edAuthor;
 
+    private Long edReceiver;
+
     @NonNull
-    @NotNull
     @NotBlank
     private String creationReason;
 
     @NonNull
-    @NotNull
     private LocalDateTime creationTime;
 
     @NonNull
-    @NotNull
     @NotBlank
     private String infoTypeCode;
 
     @NonNull
-    @NotNull
     private LocalDate businessDay;
 
     private Boolean isDeleted;
