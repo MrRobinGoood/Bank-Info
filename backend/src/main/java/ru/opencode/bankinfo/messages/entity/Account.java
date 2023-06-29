@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Accounts"/*, schema = "main"*/)
@@ -20,7 +22,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     @Setter(AccessLevel.PRIVATE)
-    private Integer id;
+    private Long id;
 
     @ManyToOne
     @JoinColumn(name = "entry_id", nullable = false)
@@ -38,16 +40,13 @@ public class Account {
     @Column(nullable = false)
     private String regulationAccountType;
 
-    @NonNull
-    @NotNull
-    @Column(nullable = false)
     private Byte controlKey;
 
     @NonNull
     @NotNull
     @NotBlank
     @Column(nullable = false)
-    private String accountCBRBIC;
+    private Long accountCBRBIC;
 
     @NonNull
     @NotNull
@@ -56,15 +55,9 @@ public class Account {
 
     private LocalDate dateOut;
 
-    @NonNull
-    @NotNull
-    @NotBlank
-    @Column(nullable = false)
     private String accountStatus;
 
-    private String AccRstr;
-
-    private LocalDate AccRstrDate;
+    private List<AccRstr> accRstrList;
 
     private Boolean isDeleted = false;
 }

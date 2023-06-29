@@ -20,7 +20,7 @@ public class Entry {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     @Setter(AccessLevel.PRIVATE)
-    private Integer id;
+    private Long id;
 
     @NonNull
     @NotNull
@@ -33,6 +33,8 @@ public class Entry {
     @NotBlank
     @Column(nullable = false)
     private String BIC;
+
+    private String changeType;
 
     @NonNull
     @NotNull

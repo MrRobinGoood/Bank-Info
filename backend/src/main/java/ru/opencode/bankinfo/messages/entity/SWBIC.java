@@ -18,7 +18,7 @@ public class SWBIC {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     @Setter(AccessLevel.PRIVATE)
-    private Integer id;
+    private Long id;
 
     @NonNull
     @NotNull

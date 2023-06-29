@@ -23,11 +23,10 @@ public class EMessageEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     @Setter(AccessLevel.PRIVATE)
-    private Integer id;
+    private Long id;
 
-    @NonNull
-    @NotNull
-    @NotEmpty
+    private String eMessageName;
+
     @OneToMany(mappedBy = "message", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<Entry> entries;
 
@@ -45,6 +44,8 @@ public class EMessageEntity {
     @NotNull
     @Column(nullable = false)
     private Long edAuthor;
+
+    private Long edReceiver;
 
     @NonNull
     @NotNull

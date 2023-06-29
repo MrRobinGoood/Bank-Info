@@ -4,8 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Embeddable
 @RequiredArgsConstructor
@@ -18,18 +20,16 @@ public class Participant {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
     @Setter(AccessLevel.PRIVATE)
-    private Integer idP;
+    private Long idP;
 
     @NonNull
     @NotNull
     @NotBlank
     @Column(nullable = false)
     private String nameP;
+    
+    private String regN;
 
-    @NonNull
-    @NotNull
-    @NotBlank
-    @Column(nullable = false)
     private String cntrCd;
 
     @NonNull
@@ -37,27 +37,12 @@ public class Participant {
     @Column(nullable = false)
     private Integer rgn;
 
-    @NonNull
-    @NotNull
-    @Column(nullable = false)
     private Integer ind;
 
-    @NonNull
-    @NotNull
-    @NotBlank
-    @Column(nullable = false)
     private String tnp;
 
-    @NonNull
-    @NotNull
-    @NotBlank
-    @Column(nullable = false)
     private String nnp;
 
-    @NonNull
-    @NotNull
-    @NotBlank
-    @Column(nullable = false)
     private String adr;
 
     private String prntBic;
@@ -90,14 +75,9 @@ public class Participant {
     @Column(nullable = false)
     private String UID;
 
-    @NonNull
-    @NotNull
-    @NotBlank
-    @Column(nullable = false)
     private String participantStatus;
-    private String rstr;
 
-    private LocalDate rstrDate;
+    List<Rstr> rstrList;
 
     private Boolean isDeletedP = false;
 }
