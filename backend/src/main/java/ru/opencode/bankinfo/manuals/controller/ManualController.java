@@ -39,8 +39,8 @@ public class ManualController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/{id}/manuals")
-    public void addManual(@PathVariable(value = "id") Long infoId, @Valid @RequestBody ManualCreationDTO manualCreationDTO) {
-        manualService.addManual(manualMapper.manualCreationDTOToManual(manualCreationDTO), infoId);
+    public Long addManual(@PathVariable(value = "id") Long infoId, @Valid @RequestBody ManualCreationDTO manualCreationDTO) {
+        return manualService.addManual(manualMapper.manualCreationDTOToManual(manualCreationDTO), infoId);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)

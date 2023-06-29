@@ -39,9 +39,9 @@ public class InfoController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void createInfo(@Valid @RequestBody InfoCreationDTO infoCreationDTO) {
+    public Long createInfo(@Valid @RequestBody InfoCreationDTO infoCreationDTO) {
         Info info = infoMapper.infoCreationDTOToInfo(infoCreationDTO);
-        infoService.createInfo(info);
+        return infoService.createInfo(info);
     }
 
     @PutMapping(value = "/{id}")

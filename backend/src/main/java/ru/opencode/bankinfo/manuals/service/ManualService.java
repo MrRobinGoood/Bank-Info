@@ -58,10 +58,11 @@ public class ManualService {
         return manualPageWithPaginateConfig;
     }
 
-    public void addManual(Manual manual, Long infoId) {
+    public Long addManual(Manual manual, Long infoId) {
         Info info = infoService.getInfo(infoId);
         manual.setInfo(info);
-        manualRepository.save(manual);
+        Manual savedManual = manualRepository.save(manual);
+        return savedManual.getId();
     }
 
     public void updateManual(Long id, ManualCreationDTO manualCreationDTO) {

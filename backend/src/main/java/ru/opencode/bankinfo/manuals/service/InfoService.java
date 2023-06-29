@@ -42,8 +42,9 @@ public class InfoService {
         return infoPageWithPaginateConfig;
     }
 
-    public void createInfo(Info info) {
-        infoRepository.save(info);
+    public Long createInfo(Info info) {
+       Info savedInfo = infoRepository.save(info);
+       return savedInfo.getId();
     }
 
     public void updateInfo(Long id, InfoCreationDTO infoCreationDTO) {
