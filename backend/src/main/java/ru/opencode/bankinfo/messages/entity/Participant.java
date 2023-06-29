@@ -6,8 +6,10 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ru.opencode.bankinfo.messages.entity.subClass.Audit;
 import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
+import ru.opencode.bankinfo.messages.entity.subClass.RstrList;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Embeddable
@@ -78,8 +80,21 @@ public class Participant {
 
     private String participantStatus;
 
-    private List<Rstr> rstrList;
+    private RstrList rstrList;
 
-    @Embedded
-    private Audit auditFieldsP;
+    private Boolean isDeletedP = false;
+
+    @NonNull
+    @NotNull
+    @Column(nullable = false)
+    private Long createdByP;
+
+    @NonNull
+    @NotNull
+    @Column(nullable = false)
+    private LocalDateTime createDateTimeP;
+
+    private Long changeByP;
+
+    private LocalDateTime changeDateTimeP;
 }

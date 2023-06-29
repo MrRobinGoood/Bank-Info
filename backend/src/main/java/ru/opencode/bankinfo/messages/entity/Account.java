@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
 import ru.opencode.bankinfo.messages.entity.subClass.Audit;
+import ru.opencode.bankinfo.messages.entity.subClass.RstrList;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -58,7 +59,7 @@ public class Account {
 
     private String accountStatus;
 
-    private List<AccRstr> accRstrList;
+    private RstrList accRstrList;
 
     @Embedded
     private Audit auditFields;
