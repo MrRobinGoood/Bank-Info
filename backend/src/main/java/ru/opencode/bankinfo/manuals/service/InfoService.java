@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.opencode.bankinfo.manuals.dto.InfoCreationDTO;
-import ru.opencode.bankinfo.manuals.entity.ConfigPagination;
+import ru.opencode.bankinfo.core.utils.ConfigPagination;
 import ru.opencode.bankinfo.manuals.entity.Info;
 import ru.opencode.bankinfo.manuals.entity.Manual;
 import ru.opencode.bankinfo.manuals.exception.InfoNotFoundException;

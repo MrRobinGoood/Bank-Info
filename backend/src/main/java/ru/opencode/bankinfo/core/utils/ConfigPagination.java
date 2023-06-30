@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.manuals.entity;
+package ru.opencode.bankinfo.core.utils;
 
 import lombok.*;
 

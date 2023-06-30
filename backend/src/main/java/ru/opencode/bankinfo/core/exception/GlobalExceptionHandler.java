@@ -12,9 +12,14 @@ import ru.opencode.bankinfo.manuals.exception.ManualNotFoundException;
 @ControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(ClassNotFoundException.class)
+    @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> handleBuildingNotFoundException(NotFoundException e) {
         return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(InvalidParametersException.class)
+    public ResponseEntity<?> handleBuildingInvalidParametersException(InvalidParametersException e) {
+        return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(InfoNotFoundException.class)
