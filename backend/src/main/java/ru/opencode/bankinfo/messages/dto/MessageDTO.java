@@ -19,7 +19,7 @@ public class MessageDTO {
 
     private String eMessageName;
 
-    private Set<EntryDTO> entries;
+    private Set<Long> entriesId;
 
     @NonNull
     private Long edNo;

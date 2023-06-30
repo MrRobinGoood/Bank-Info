@@ -25,9 +25,7 @@ public class Entry {
 
     @NonNull
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "message_id", nullable = false)
-    private EMessageEntity message;
+    private Long messageId;
 
     @NonNull
     @NotNull

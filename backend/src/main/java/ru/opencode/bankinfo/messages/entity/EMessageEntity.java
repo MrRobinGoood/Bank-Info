@@ -9,6 +9,7 @@ import ru.opencode.bankinfo.messages.entity.subClass.Audit;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -28,8 +29,7 @@ public class EMessageEntity {
 
     private String eMessageName;
 
-    @OneToMany(mappedBy = "message", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<Entry> entries;
+    private List<Long> entriesId;
 
     @NonNull
     @NotNull
