@@ -67,7 +67,7 @@ public class XmlToPOJO {
     public void deleteFile(LocalDate date) throws IOException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String formattedString = date.format(formatter);
-        Path path = Path.of(String.format("src/main/resources/%s_ED807_full.xml", formattedString));
+        Path path = Path.of(String.format("backend/src/main/resources/%s_ED807_full.xml", formattedString));
         Files.delete(path);
     }
 
@@ -88,30 +88,21 @@ public class XmlToPOJO {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
         String formattedString = date.format(formatter);
         URL url = new URL(String.format("http://cbr.ru/vfs/mcirabis/BIKNew/%sED01OSBR.zip", formattedString));
-        Path path = Path.of("backend/src/main/resources/xml_data");
+        Path path = Path.of("backend/src/main/resources");
         unzip(url, path);
     }
 
-//    public static Object xmlToPOJO(LocalDate localDate, Class clazz) throws JAXBException, ParserConfigurationException, IOException, SAXException {
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-//        String formattedString = localDate.format(formatter);
-//        Document document = getDocument("backend/src/main/resources/xml_data/20230629_ED807_full.xml");
-//        String xml = documentToString(document);
-//        StringReader reader = new StringReader(xml);
-//
-//        JAXBContext context = JAXBContext.newInstance(clazz);
-//        Unmarshaller unmarshaller = context.createUnmarshaller();
-//        clazz message = (clazz) unmarshaller.unmarshal(reader);
-//    }
+    public static MessageDTO xmlToPOJO(String xml) throws JAXBException {
+        StringReader reader = new StringReader(xml);
+        JAXBContext context = JAXBContext.newInstance(MessageDTO.class);
+        Unmarshaller unmarshaller = context.createUnmarshaller();
+        return (MessageDTO) unmarshaller.unmarshal(reader);
+    }
     public static void main(String[] args) throws JAXBException, IOException, ParserConfigurationException, SAXException {
 //        LocalDate localDate = LocalDate.now();
 //        downoloadXML(localDate);
-        Document document = getDocument("backend/src/main/resources/xml_data/20230629_ED807_full.xml");
+        Document document = getDocument("backend/src/main/resources/20230703_ED807_full.xml");
         String xml = documentToString(document);
-        StringReader reader = new StringReader(xml);
-
-        JAXBContext context = JAXBContext.newInstance(EntryDTO.class);
-        Unmarshaller unmarshaller = context.createUnmarshaller();
-        EntryDTO message = (EntryDTO) unmarshaller.unmarshal(reader);
+        MessageDTO message = xmlToPOJO(xml);
     }
 }

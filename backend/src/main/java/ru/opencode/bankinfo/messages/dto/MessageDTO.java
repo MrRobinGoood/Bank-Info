@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import ru.opencode.bankinfo.adapter.LocalDateAdapter;
 import ru.opencode.bankinfo.adapter.LocalDateTimeAdapter;
+import ru.opencode.bankinfo.messages.dto.subDTO.EntryDTO;
 import ru.opencode.bankinfo.messages.entity.Entry;
 
 import javax.xml.bind.annotation.*;
@@ -28,6 +29,10 @@ public class MessageDTO {
     @NonNull
     @NotNull
     private Integer id;
+
+    private String eMessageName;
+    private Set<Long> entriesId;
+    private Long edReceiver;
 
     @NonNull
     @NotNull
@@ -77,6 +82,9 @@ public class MessageDTO {
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     @XmlAttribute(name = "BusinessDay")
     private LocalDate businessDay;
+
+    @XmlElement(name = "BICDirectoryEntry", namespace = "urn:cbr-ru:ed:v2.0")
+    private EntryDTO bicDirectoryEntries;
 
     private Boolean isDeleted;
 }

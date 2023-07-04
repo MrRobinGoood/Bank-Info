@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @AllArgsConstructor
 @NoArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "ED807", namespace = "urn:cbr-ru:ed:v2.0")
+@XmlRootElement(name = "SWBICS", namespace = "urn:cbr-ru:ed:v2.0")
 public class SWBICDTO {
 
     @NonNull

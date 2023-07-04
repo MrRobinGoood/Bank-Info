@@ -112,9 +112,9 @@ public class EntryDTO {
     private Long changeByP;
 
     private LocalDateTime changeDateTimeP;
-    
+    @XmlElement(name = "SWBICS", namespace = "urn:cbr-ru:ed:v2.0")
     private Set<SWBICDTO> swbics;
-    
+    @XmlElement(name = "Accounts", namespace = "urn:cbr-ru:ed:v2.0")
     private Set<AccountDTO> accounts;
 
     @Embedded

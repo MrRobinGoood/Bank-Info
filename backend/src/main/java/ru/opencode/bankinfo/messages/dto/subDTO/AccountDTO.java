@@ -21,7 +21,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "ED807", namespace = "urn:cbr-ru:ed:v2.0")
+@XmlRootElement(name = "Accounts", namespace = "urn:cbr-ru:ed:v2.0")
 public class AccountDTO {
 
     @NonNull
