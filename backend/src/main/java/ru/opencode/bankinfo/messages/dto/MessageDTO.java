@@ -35,6 +35,7 @@ public class MessageDTO {
     @NonNull
     @NotNull
     @NotEmpty
+    @XmlElement(name = "BICDirectoryEntry", namespace = "urn:cbr-ru:ed:v2.0")
     private Set<EntryDTO> entries;
 
     @NonNull
@@ -81,8 +82,8 @@ public class MessageDTO {
     @XmlAttribute(name = "BusinessDay")
     private LocalDate businessDay;
 
-    @XmlElement(name = "BICDirectoryEntry", namespace = "urn:cbr-ru:ed:v2.0")
-    private EntryDTO bicDirectoryEntries;
+
+//    private EntryDTO bicDirectoryEntries;
 
     @Embedded
     private Audit auditFields;

@@ -56,9 +56,8 @@ public class AccountDTO {
     @XmlAttribute(name = "AccountStatus")
     @Size(min = 4, max = 4)
     private String accountStatus;
-
     @XmlElement(name = "AccRstrList", namespace = "urn:cbr-ru:ed:v2.0")
-    private List<AccRstr> accRstrList;
+    private List<AccRstrListDto> accRstrLists;
 
     @Embedded
     private Audit auditFields;

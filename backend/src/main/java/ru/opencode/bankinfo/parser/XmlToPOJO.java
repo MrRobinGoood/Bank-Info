@@ -3,10 +3,6 @@ package ru.opencode.bankinfo.parser;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
-import ru.opencode.bankinfo.messages.dto.subDTO.AccountDTO;
-import ru.opencode.bankinfo.messages.dto.subDTO.EntryDTO;
-import ru.opencode.bankinfo.messages.dto.subDTO.SWBICDTO;
-import ru.opencode.bankinfo.messages.entity.EMessageEntity;
 
 import java.io.File;
 import java.io.IOException;
@@ -104,5 +100,6 @@ public class XmlToPOJO {
         Document document = getDocument("backend/src/main/resources/20230703_ED807_full.xml");
         String xml = documentToString(document);
         MessageDTO message = xmlToPOJO(xml);
+        System.out.println(message);
     }
 }
