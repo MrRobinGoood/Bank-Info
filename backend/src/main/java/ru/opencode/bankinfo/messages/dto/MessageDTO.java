@@ -1,5 +1,6 @@
 package ru.opencode.bankinfo.messages.dto;
 
+import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -12,6 +13,7 @@ import ru.opencode.bankinfo.adapter.LocalDateAdapter;
 import ru.opencode.bankinfo.adapter.LocalDateTimeAdapter;
 import ru.opencode.bankinfo.messages.dto.subDTO.EntryDTO;
 import ru.opencode.bankinfo.messages.entity.Entry;
+import ru.opencode.bankinfo.messages.entity.subClass.Audit;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -26,18 +28,14 @@ import java.util.Set;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class MessageDTO {
 
-    @NonNull
-    @NotNull
-    private Integer id;
-
     private String eMessageName;
-    private Set<Long> entriesId;
+
     private Long edReceiver;
 
     @NonNull
     @NotNull
     @NotEmpty
-    private Set<Entry> entries;
+    private Set<EntryDTO> entries;
 
     @NonNull
     @NotNull
@@ -86,5 +84,6 @@ public class MessageDTO {
     @XmlElement(name = "BICDirectoryEntry", namespace = "urn:cbr-ru:ed:v2.0")
     private EntryDTO bicDirectoryEntries;
 
-    private Boolean isDeleted;
+    @Embedded
+    private Audit auditFields;
 }
