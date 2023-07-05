@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.messages.entity.subClass;
+package ru.opencode.bankinfo.core.utils;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embeddable;

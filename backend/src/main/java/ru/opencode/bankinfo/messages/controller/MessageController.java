@@ -4,10 +4,12 @@ import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.w3c.dom.Document;
 import ru.opencode.bankinfo.messages.entity.EMessageEntity;
 import ru.opencode.bankinfo.messages.entity.Entry;
 import ru.opencode.bankinfo.messages.service.MessageService;
 
+import javax.xml.bind.JAXBException;
 import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -50,5 +52,13 @@ public class MessageController {
     @GetMapping(value = "/{id}/bics")
     public List<Entry> getEntries(@PathVariable @Min(1) Long id) {
         return service.getEntriesByMessageId(id);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping(value = "/xml")
+    public void createMessage(
+            @RequestBody Document xml
+            ) throws JAXBException {
+        service.createMessageByXml(xml);
     }
 }

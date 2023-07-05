@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import ru.opencode.bankinfo.adapter.LocalDateAdapter;
 import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
-import ru.opencode.bankinfo.messages.entity.subClass.Audit;
+import ru.opencode.bankinfo.core.utils.Audit;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
