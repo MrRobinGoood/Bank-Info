@@ -3,8 +3,8 @@ package ru.opencode.bankinfo.manuals.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import ru.opencode.bankinfo.core.exception.util.Audit;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Table(name = "info")
@@ -22,14 +22,9 @@ public class Info {
     private Long id;
     @Column(nullable = false)
     private String name;
-    @Column(name = "c_time")
-    private LocalDateTime cTime;
-    @Column(name = "c_user")
-    private Long cUser;
-    @Column(name = "e_time")
-    private LocalDateTime eTime;
-    @Column(name = "e_user")
-    private Long eUser;
+    @Embedded
+    private Audit audit;
+
     @Column(name = "is_deleted", columnDefinition = "boolean default false")
     private Boolean isDeleted = false;
     @JsonIgnore
