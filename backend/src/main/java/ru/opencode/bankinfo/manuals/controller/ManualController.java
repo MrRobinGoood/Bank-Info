@@ -27,11 +27,11 @@ public class ManualController {
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(value = "/{id}/manuals")
     public PaginatedResponseDTO getManualsByInfoId(@PathVariable(value = "id") Long infoId,
-                                           @RequestParam(defaultValue = "1", name = "page") Integer pageNo,
-                                           @RequestParam(defaultValue = "10", name = "size") Integer pageSize,
-                                           @RequestParam(defaultValue = "", name = "code") String code,
-                                           @RequestParam(defaultValue = "", name = "description") String description,
-                                           @RequestParam(defaultValue = "false", name = "deleted") Boolean isDeleted) {
+                                                   @RequestParam(defaultValue = "1", name = "page") Integer pageNo,
+                                                   @RequestParam(defaultValue = "10", name = "size") Integer pageSize,
+                                                   @RequestParam(defaultValue = "", name = "code") String code,
+                                                   @RequestParam(defaultValue = "", name = "description") String description,
+                                                   @RequestParam(defaultValue = "false", name = "deleted") Boolean isDeleted) {
 
         List<Object> manualPageWithPaginateConfig = manualService.getManualsByInfoId(infoId, isDeleted, code, description, pageNo, pageSize);
         return new PaginatedResponseDTO(manualPageWithPaginateConfig.get(0), manualPageWithPaginateConfig.get(1));
@@ -39,8 +39,8 @@ public class ManualController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/{id}/manuals")
-    public void addManual(@PathVariable(value = "id") Long infoId, @Valid @RequestBody ManualCreationDTO manualCreationDTO) {
-        manualService.addManual(manualMapper.manualCreationDTOToManual(manualCreationDTO), infoId);
+    public Long addManual(@PathVariable(value = "id") Long infoId, @Valid @RequestBody ManualCreationDTO manualCreationDTO) {
+        return manualService.addManual(manualMapper.manualCreationDTOToManual(manualCreationDTO), infoId);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
@@ -55,5 +55,9 @@ public class ManualController {
         manualService.deleteManual(id);
     }
 
-
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PatchMapping(value = "/manuals/{id}")
+    public void restoreManual(@PathVariable(value = "id") Long id) {
+        manualService.restoreManual(id);
+    }
 }

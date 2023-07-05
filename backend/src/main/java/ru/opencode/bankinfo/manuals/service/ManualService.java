@@ -57,10 +57,11 @@ public class ManualService {
         return manualPageWithPaginateConfig;
     }
 
-    public void addManual(Manual manual, Long infoId) {
+    public Long addManual(Manual manual, Long infoId) {
         Info info = infoService.getInfo(infoId);
         manual.setInfo(info);
-        manualRepository.save(manual);
+        Manual savedManual = manualRepository.save(manual);
+        return savedManual.getId();
     }
 
     public void updateManual(Long id, ManualCreationDTO manualCreationDTO) {
@@ -72,6 +73,12 @@ public class ManualService {
     public void deleteManual(Long id) {
         Manual manual = getManual(id);
         manual.setIsDeleted(true);
+        manualRepository.save(manual);
+    }
+
+    public void restoreManual(Long id) {
+        Manual manual = getManual(id);
+        manual.setIsDeleted(false);
         manualRepository.save(manual);
     }
 

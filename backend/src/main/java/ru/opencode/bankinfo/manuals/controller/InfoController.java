@@ -39,9 +39,9 @@ public class InfoController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void createInfo(@Valid @RequestBody InfoCreationDTO infoCreationDTO) {
+    public Long createInfo(@Valid @RequestBody InfoCreationDTO infoCreationDTO) {
         Info info = infoMapper.infoCreationDTOToInfo(infoCreationDTO);
-        infoService.createInfo(info);
+        return infoService.createInfo(info);
     }
 
     @PutMapping(value = "/{id}")
@@ -54,5 +54,11 @@ public class InfoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteInfo(@PathVariable(value = "id") Long id) {
         infoService.deleteInfo(id);
+    }
+
+    @PatchMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void restoreInfo(@PathVariable(value = "id") Long id) {
+        infoService.restoreInfo(id);
     }
 }

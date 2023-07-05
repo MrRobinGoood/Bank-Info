@@ -22,7 +22,7 @@ public class Manual {
 
     @Column(nullable = false)
     private String code;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1024)
     private String description;
     @Column(name = "c_time")
     private LocalDateTime cTime;
