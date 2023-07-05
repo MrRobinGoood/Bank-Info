@@ -20,8 +20,8 @@ public class MessageController {
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    public List<EMessageEntity> getMessages() {
-        return service.getMessages();
+    public String getMessages() {
+        return "{\"items\":[{\"id\":0,\"eMessageName\":\"ED807\",\"fileUrl\":\"20230518_ED807_full.xml\",\"edNo\":1,\"edDate\":\"2023-05-17\",\"edAuthor\":4583001999,\"creationReason\":\"FCBD\",\"creationDateTime\":\"2023-05-17T18:31:47Z\",\"infoTypeCode\":\"FIRR\",\"businessDay\":\"2022-07-05\",\"isDeleted\":false,\"createdBy\":0,\"createDateTime\":\"2023-05-18T14:52:05Z\",\"changedBy\":0,\"changeDateTime\":\"2023-05-18T14:53:05Z\"}],\"config\":{\"countOfPages\":5,\"countOfItems\":50}}";
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
