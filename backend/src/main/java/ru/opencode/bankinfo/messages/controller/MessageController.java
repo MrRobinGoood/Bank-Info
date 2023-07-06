@@ -4,13 +4,19 @@ import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 import ru.opencode.bankinfo.messages.entity.EMessageEntity;
 import ru.opencode.bankinfo.messages.entity.Entry;
 import ru.opencode.bankinfo.messages.service.MessageService;
 
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -57,8 +63,8 @@ public class MessageController {
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/xml")
     public void createMessage(
-            @RequestBody Document xml
-            ) throws JAXBException {
-        service.createMessageByXml(xml);
+            @RequestPart("file") MultipartFile file
+            ) throws JAXBException, IOException, ParserConfigurationException, SAXException {
+        service.createMessageByXml(file);
     }
 }

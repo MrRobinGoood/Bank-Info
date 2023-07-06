@@ -2,7 +2,9 @@ package ru.opencode.bankinfo.messages.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 import ru.opencode.bankinfo.core.exception.InvalidParametersException;
 import ru.opencode.bankinfo.core.exception.NotFoundException;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
@@ -13,7 +15,11 @@ import ru.opencode.bankinfo.messages.repository.EntryRepository;
 import ru.opencode.bankinfo.messages.repository.MessageRepository;
 import ru.opencode.bankinfo.parser.XmlToPOJO;
 
+import javax.print.Doc;
 import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -77,7 +83,9 @@ public class MessageService {
         return entriesId.stream().map(this::getEntry).toList();
     }
 
-    public void createMessageByXml(Document document) throws JAXBException {
+    public void createMessageByXml(MultipartFile multifile) throws JAXBException, IOException, ParserConfigurationException, SAXException {
+        File file = XmlToPOJO.convertMultipartFileToFile(multifile);
+        Document document = XmlToPOJO.fileToDocument(file);
         MessageDTO dto = XmlToPOJO.xmlToPOJO(XmlToPOJO.documentToString(document));
         createMessage(dto);
     }

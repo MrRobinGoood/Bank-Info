@@ -1,5 +1,7 @@
 package ru.opencode.bankinfo.parser;
 
+import org.springframework.util.FileCopyUtils;
+import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
@@ -42,6 +44,19 @@ public class XmlToPOJO {
         DocumentBuilder builder = factory.newDocumentBuilder();
 
         return builder.parse(new File(path));
+    }
+    public static Document fileToDocument(File file) throws IOException, SAXException, ParserConfigurationException {
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+
+        DocumentBuilder builder = factory.newDocumentBuilder();
+
+        return builder.parse(file);
+    }
+
+    public static File convertMultipartFileToFile(MultipartFile multipartFile) throws IOException {
+        File file = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+        FileCopyUtils.copy(multipartFile.getBytes(), file);
+        return file;
     }
     public static String documentToString(Document doc) {
         try {
@@ -94,12 +109,12 @@ public class XmlToPOJO {
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return (MessageDTO) unmarshaller.unmarshal(reader);
     }
-    public static void main(String[] args) throws JAXBException, IOException, ParserConfigurationException, SAXException {
-//        LocalDate localDate = LocalDate.now();
-//        downoloadXML(localDate);
-        Document document = getDocument("backend/src/main/resources/20230703_ED807_full.xml");
-        String xml = documentToString(document);
-        MessageDTO message = xmlToPOJO(xml);
-        System.out.println(message);
-    }
+//    public static void main(String[] args) throws JAXBException, IOException, ParserConfigurationException, SAXException {
+////        LocalDate localDate = LocalDate.now();
+////        downoloadXML(localDate);
+//        Document document = getDocument("backend/src/main/resources/20230703_ED807_full.xml");
+//        String xml = documentToString(document);
+//        MessageDTO message = xmlToPOJO(xml);
+//        System.out.println(message);
+//    }
 }
