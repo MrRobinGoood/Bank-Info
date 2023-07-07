@@ -1,26 +1,41 @@
 package ru.opencode.bankinfo.messages.mapper;
 
+import lombok.Data;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
+import org.springframework.beans.factory.annotation.Autowired;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
 import ru.opencode.bankinfo.messages.entity.EMessageEntity;
 
 import java.util.List;
 import java.util.Set;
 
-@Mapper(componentModel = "spring")
-public interface MessageMapper {
+public class MessageMapper {
 
-    MessageDTO messageToDTO(EMessageEntity message);
+    @Autowired
+    private EntryMapper entryMapper;
 
-    EMessageEntity DTOToMessage(MessageDTO dto);
+    //MessageDTO messageToDTO(EMessageEntity message);
 
-    List<MessageDTO> messagesToDTO(List<EMessageEntity> entities);
+    public EMessageEntity DTOToMessage(MessageDTO dto){
+        EMessageEntity message = new EMessageEntity(dto.getEdNo(), dto.getEdDate(), dto.getEdAuthor(),
+                dto.getCreationReason(), dto.getCreationTime(), dto.getInfoTypeCode(), dto.getBusinessDay());
+        message.setEMessageName(dto.getEMessageName());
+        message.setEdReceiver(dto.getEdReceiver());
+        message.setAuditFields(dto.getAuditFields());
 
-    Set<MessageDTO> messagesToDTO(Set<EMessageEntity> entities);
+        message.setEntriesId(dto.getEntries().stream()
+                .map(e -> entryMapper.DTOToEntry(e).getId())
+                .toList());
 
-    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateMessageFromDTO(MessageDTO dto, @MappingTarget EMessageEntity entity);
+        return message;
+    };
+
+    //List<MessageDTO> messagesToDTO(List<EMessageEntity> entities);
+
+    //Set<MessageDTO> messagesToDTO(Set<EMessageEntity> entities);
+
+    //void updateMessageFromDTO(MessageDTO dto, EMessageEntity entity);
 }
