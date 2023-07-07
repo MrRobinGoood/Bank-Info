@@ -28,6 +28,10 @@ public class EntryDTO {
     @Size(min = 9, max = 9)
     private String BIC;
 
+    @XmlAttribute(name = "ChangeType")
+    @Size(min = 4, max = 4)
+    private String changeType;
+
     @NonNull
     @NotBlank
     @XmlElement(name = "ParticipantInfo", namespace = "urn:cbr-ru:ed:v2.0")
