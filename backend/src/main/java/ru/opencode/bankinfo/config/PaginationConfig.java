@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.core.config;
+package ru.opencode.bankinfo.config;
 
 import lombok.*;
 

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.opencode.bankinfo.core.utils.Audit;
+import ru.opencode.bankinfo.util.Audit;
 import ru.opencode.bankinfo.messages.entity.subClass.RstrList;
 
 import java.time.LocalDate;
@@ -16,7 +16,7 @@ import java.time.LocalDate;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Account {
+public class Account extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,6 +59,4 @@ public class Account {
 
     private RstrList accRstrList;
 
-    @Embedded
-    private Audit auditFields;
 }

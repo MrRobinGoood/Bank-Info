@@ -1,6 +1,6 @@
 package ru.opencode.bankinfo.manuals.exception;
 
-import ru.opencode.bankinfo.core.exception.NotFoundException;
+import ru.opencode.bankinfo.exception.NotFoundException;
 
 public class InfoNotFoundException extends NotFoundException {
     public InfoNotFoundException() {

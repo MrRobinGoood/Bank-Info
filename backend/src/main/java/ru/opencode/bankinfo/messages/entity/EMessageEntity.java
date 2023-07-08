@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.opencode.bankinfo.core.utils.Audit;
+import ru.opencode.bankinfo.util.Audit;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class EMessageEntity {
+public class EMessageEntity extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -68,6 +68,4 @@ public class EMessageEntity {
     @Column(nullable = false)
     private LocalDate businessDay;
 
-    @Embedded
-    private Audit auditFields;
 }

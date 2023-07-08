@@ -3,7 +3,7 @@ package ru.opencode.bankinfo.manuals.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import ru.opencode.bankinfo.core.util.Audit;
+import ru.opencode.bankinfo.util.Audit;
 
 import java.util.List;
 

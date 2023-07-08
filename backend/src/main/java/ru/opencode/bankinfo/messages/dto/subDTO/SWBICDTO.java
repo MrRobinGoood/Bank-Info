@@ -33,5 +33,4 @@ public class SWBICDTO {
     @XmlAttribute(name = "DefaultSWBIC")
     private Boolean defaultSWBIC;
 
-    private Boolean isDeleted;
 }

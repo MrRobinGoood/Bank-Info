@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.opencode.bankinfo.core.utils.Audit;
+import ru.opencode.bankinfo.util.Audit;
 
 @Entity
 @Table(name = "SWBICS"/*, schema = "main"*/)
@@ -13,7 +13,7 @@ import ru.opencode.bankinfo.core.utils.Audit;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class SWBIC {
+public class SWBIC extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -38,6 +38,4 @@ public class SWBIC {
     @Column(nullable = false)
     private Boolean defaultSWBIC;
 
-    @Embedded
-    private Audit auditFields;
 }

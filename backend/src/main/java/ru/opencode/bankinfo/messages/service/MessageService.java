@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
-import ru.opencode.bankinfo.core.exception.InvalidParametersException;
-import ru.opencode.bankinfo.core.exception.NotFoundException;
+import ru.opencode.bankinfo.exception.InvalidParametersException;
+import ru.opencode.bankinfo.exception.NotFoundException;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
 import ru.opencode.bankinfo.messages.entity.EMessageEntity;
 import ru.opencode.bankinfo.messages.entity.Entry;
@@ -63,13 +63,13 @@ public class MessageService {
 
     public void deleteMessage(Long id) {
         EMessageEntity message = getMessageById(id);
-        message.getAuditFields().setIsDeleted(true);
+        message.setIsDeleted(true);
         messageRepo.save(message);
     }
 
     public void restoreMessage(Long id) {
         EMessageEntity message = getMessageById(id);
-        message.getAuditFields().setIsDeleted(false);
+        message.setIsDeleted(false);
         messageRepo.save(message);
     }
 

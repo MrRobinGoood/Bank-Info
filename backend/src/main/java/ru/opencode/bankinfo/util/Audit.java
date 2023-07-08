@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.core.util;
+package ru.opencode.bankinfo.util;
 
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;

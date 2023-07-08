@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.opencode.bankinfo.core.utils.Audit;
+import ru.opencode.bankinfo.util.Audit;
 
 import java.util.Set;
 
@@ -15,7 +15,7 @@ import java.util.Set;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Entry {
+public class Entry extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -47,6 +47,4 @@ public class Entry {
     @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private Set<Account> accounts;
 
-    @Embedded
-    private Audit auditFields;
 }
