@@ -2,6 +2,9 @@ package ru.opencode.bankinfo.messages.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+import org.w3c.dom.Document;
+import org.xml.sax.SAXException;
 import ru.opencode.bankinfo.core.exception.InvalidParametersException;
 import ru.opencode.bankinfo.core.exception.NotFoundException;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
@@ -10,7 +13,12 @@ import ru.opencode.bankinfo.messages.entity.Entry;
 import ru.opencode.bankinfo.messages.mapper.MessageMapper;
 import ru.opencode.bankinfo.messages.repository.EntryRepository;
 import ru.opencode.bankinfo.messages.repository.MessageRepository;
+import ru.opencode.bankinfo.parser.XmlToPOJO;
 
+import javax.xml.bind.JAXBException;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -22,8 +30,7 @@ public class MessageService {
     @Autowired
     private MessageRepository messageRepo;
 
-    @Autowired
-    private MessageMapper mapper;
+    private final MessageMapper mapper = new MessageMapper();
 
     public EMessageEntity getMessageById(Long id) {
         return messageRepo.findById(id).orElseThrow(() -> new NotFoundException("Message not found"));
@@ -42,11 +49,11 @@ public class MessageService {
         }
     }
 
-    public void updateMessage(Long id, MessageDTO dto) {
-        EMessageEntity message = getMessageById(id);
-        mapper.updateMessageFromDTO(dto, message);
-        messageRepo.save(message);
-    }
+//    public void updateMessage(Long id, MessageDTO dto) {
+//        EMessageEntity message = getMessageById(id);
+//        mapper.updateMessageFromDTO(dto, message);
+//        messageRepo.save(message);
+//    }
 
     public void updateMessageName(Long id, String name){
         EMessageEntity message = getMessageById(id);
@@ -73,5 +80,12 @@ public class MessageService {
     public List<Entry> getEntriesByMessageId(Long id) {
         List<Long> entriesId = getMessageById(id).getEntriesId();
         return entriesId.stream().map(this::getEntry).toList();
+    }
+
+    public void createMessageByXml(MultipartFile multifile) throws JAXBException, IOException, ParserConfigurationException, SAXException {
+        File file = XmlToPOJO.convertMultipartFileToFile(multifile);
+        Document document = XmlToPOJO.fileToDocument(file);
+        MessageDTO dto = XmlToPOJO.xmlToPOJO(XmlToPOJO.documentToString(document));
+        createMessage(dto);
     }
 }

@@ -19,12 +19,6 @@ import java.util.List;
 @XmlRootElement(name = "ParticipantInfo", namespace = "urn:cbr-ru:ed:v2.0")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ParticipantInfoDTO {
-    @XmlAttribute(name = "ChangeType")
-    @Size(min = 4, max = 4)
-    private String changeType;
-
-    @NonNull
-    private Integer idP;
 
     @NonNull
     @NotBlank

@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.opencode.bankinfo.messages.entity.subClass.Audit;
+import ru.opencode.bankinfo.core.utils.Audit;
 
 @Entity
 @Table(name = "SWBICS"/*, schema = "main"*/)

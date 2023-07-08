@@ -4,13 +4,10 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.opencode.bankinfo.messages.entity.subClass.Audit;
-import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
 import ru.opencode.bankinfo.messages.entity.subClass.RstrList;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Embeddable
 @RequiredArgsConstructor

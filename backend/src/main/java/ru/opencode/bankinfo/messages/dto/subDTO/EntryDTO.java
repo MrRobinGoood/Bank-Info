@@ -1,13 +1,11 @@
 package ru.opencode.bankinfo.messages.dto.subDTO;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.*;
 import ru.opencode.bankinfo.adapter.LocalDateAdapter;
-import ru.opencode.bankinfo.messages.entity.subClass.Audit;
+import ru.opencode.bankinfo.core.utils.Audit;
 import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
 
 import javax.xml.bind.annotation.*;
@@ -29,6 +27,10 @@ public class EntryDTO {
     @XmlAttribute(name = "BIC")
     @Size(min = 9, max = 9)
     private String BIC;
+
+    @XmlAttribute(name = "ChangeType")
+    @Size(min = 4, max = 4)
+    private String changeType;
 
     @NonNull
     @NotBlank

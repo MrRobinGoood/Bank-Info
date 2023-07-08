@@ -2,15 +2,13 @@ package ru.opencode.bankinfo.messages.entity;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.opencode.bankinfo.messages.entity.subClass.Audit;
+import ru.opencode.bankinfo.core.utils.Audit;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "EMessages"/*, schema = "main"*/)
