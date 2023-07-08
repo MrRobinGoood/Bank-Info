@@ -14,14 +14,14 @@ public class Audit {
 
     private Boolean isDeleted = false;
 
-    @NonNull
-    @NotNull
-    @Column(nullable = false)
+//    @NonNull
+//    @NotNull
+//    @Column(nullable = false)
     private Long createdBy;
 
-    @NonNull
-    @NotNull
-    @Column(nullable = false)
+//    @NonNull
+//    @NotNull
+//    @Column(nullable = false)
     private LocalDateTime createDateTime;
 
     private Long changeBy;

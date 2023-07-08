@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import ru.opencode.bankinfo.adapter.LocalDateAdapter;
-import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
 import ru.opencode.bankinfo.core.utils.Audit;
 
 import javax.xml.bind.annotation.*;
@@ -44,7 +43,7 @@ public class AccountDTO {
     @NotBlank
     @XmlAttribute(name = "AccountCBRBIC")
     @Size(min = 9, max = 9)
-    private String accountCBRBIC;
+    private Long accountCBRBIC;
 
     @NonNull
     @NotBlank

@@ -31,5 +31,5 @@ public class AccRstrListDto {
 
     @XmlAttribute(name = "SuccessorBIC")
     @Size(min = 9, max = 9)
-    private String successorBIC;
+    private Long successorBIC;
 }

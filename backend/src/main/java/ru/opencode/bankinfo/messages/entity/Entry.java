@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ru.opencode.bankinfo.core.utils.Audit;
 
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -25,6 +26,7 @@ public class Entry {
 
     @NonNull
     @NotNull
+    @Column(nullable = false)
     private Long messageId;
 
     @NonNull
@@ -42,10 +44,10 @@ public class Entry {
     private Participant participant;
 
     @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<SWBIC> swbics;
+    private List<SWBIC> swbics;
 
     @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<Account> accounts;
+    private List<Account> accounts;
 
     @Embedded
     private Audit auditFields;

@@ -1,7 +1,8 @@
-package ru.opencode.bankinfo.messages.entity.subClass;
+package ru.opencode.bankinfo.messages.subClass;
 
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @RequiredArgsConstructor
@@ -9,7 +10,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @NoArgsConstructor
-public class Rstr {
+public class Rstr implements Serializable {
 
     @NonNull
     private String rstr;

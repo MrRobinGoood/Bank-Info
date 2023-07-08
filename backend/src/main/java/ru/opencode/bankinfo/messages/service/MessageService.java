@@ -8,6 +8,7 @@ import org.xml.sax.SAXException;
 import ru.opencode.bankinfo.core.exception.InvalidParametersException;
 import ru.opencode.bankinfo.core.exception.NotFoundException;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
+import ru.opencode.bankinfo.messages.dto.subDTO.EntryDTO;
 import ru.opencode.bankinfo.messages.entity.EMessageEntity;
 import ru.opencode.bankinfo.messages.entity.Entry;
 import ru.opencode.bankinfo.messages.mapper.MessageMapper;
@@ -19,7 +20,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class MessageService {
@@ -42,17 +45,19 @@ public class MessageService {
 
     public void createMessage(MessageDTO dto) {
         try {
-            messageRepo.save(mapper.DTOToMessage(dto));
+            EMessageEntity message = mapper.DTOToMessage(dto);
+            messageRepo.save(message);
+            System.out.println(message.getId());
+
+            List<Entry> entries = createEntriesForMessage(dto, message);
+            entries.forEach(e -> entryRepo.save(e));
+
+            fillMessage(entries, message);
+            messageRepo.save(message);
         } catch (RuntimeException e) {
             throw new InvalidParametersException("Invalid parameters for creating message");
         }
     }
-
-//    public void updateMessage(Long id, MessageDTO dto) {
-//        EMessageEntity message = getMessageById(id);
-//        mapper.updateMessageFromDTO(dto, message);
-//        messageRepo.save(message);
-//    }
 
     public void updateMessageName(Long id, String name){
         EMessageEntity message = getMessageById(id);
@@ -86,5 +91,19 @@ public class MessageService {
         Document document = XmlToPOJO.fileToDocument(file);
         MessageDTO dto = XmlToPOJO.xmlToPOJO(XmlToPOJO.documentToString(document));
         createMessage(dto);
+    }
+
+    private List<Entry> createEntriesForMessage(MessageDTO dto, EMessageEntity message){
+        Set<EntryDTO> entriesDTO = dto.getEntries();
+        List<Entry> entries = new LinkedList<>();
+
+        entriesDTO.stream().map(d -> mapper.DTOToEntry(d,
+                message.getId())).forEach(entries::add);
+
+        return entries;
+    }
+
+    private void fillMessage(List<Entry> entries, EMessageEntity message){
+        message.setEntriesId(entries.stream().map(Entry::getMessageId).toList());
     }
 }

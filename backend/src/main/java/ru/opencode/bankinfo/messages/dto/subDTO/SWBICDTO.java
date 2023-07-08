@@ -21,9 +21,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class SWBICDTO {
 
     @NonNull
-    private Entry entry;
-
-    @NonNull
     @NotBlank
     @XmlAttribute(name = "SWBIC")
     @Size(max = 11)

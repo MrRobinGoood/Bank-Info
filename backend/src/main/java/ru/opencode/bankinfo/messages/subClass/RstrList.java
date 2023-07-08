@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.messages.entity.subClass;
+package ru.opencode.bankinfo.messages.subClass;
 
 import java.util.ArrayList;
 

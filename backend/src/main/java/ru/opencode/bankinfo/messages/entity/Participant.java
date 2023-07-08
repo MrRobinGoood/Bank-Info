@@ -4,13 +4,16 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.opencode.bankinfo.messages.entity.subClass.RstrList;
+import ru.opencode.bankinfo.messages.subClass.Rstr;
+import ru.opencode.bankinfo.messages.subClass.RstrList;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Embeddable
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -81,14 +84,14 @@ public class Participant {
 
     private Boolean isDeletedP = false;
 
-    @NonNull
-    @NotNull
-    @Column(nullable = false)
+//    @NonNull
+//    @NotNull
+//    @Column(nullable = false)
     private Long createdByP;
 
-    @NonNull
-    @NotNull
-    @Column(nullable = false)
+//    @NonNull
+//    @NotNull
+//    @Column(nullable = false)
     private LocalDateTime createDateTimeP;
 
     private Long changeByP;

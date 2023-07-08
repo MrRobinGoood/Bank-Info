@@ -1,23 +1,15 @@
 package ru.opencode.bankinfo.messages.mapper;
 
-import lombok.Data;
-import org.mapstruct.BeanMapping;
-import org.mapstruct.Mapper;
-import org.mapstruct.MappingTarget;
-import org.mapstruct.NullValuePropertyMappingStrategy;
-import org.springframework.beans.factory.annotation.Autowired;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
-import ru.opencode.bankinfo.messages.entity.EMessageEntity;
+import ru.opencode.bankinfo.messages.dto.subDTO.*;
+import ru.opencode.bankinfo.messages.entity.*;
+import ru.opencode.bankinfo.messages.subClass.AccRstr;
+import ru.opencode.bankinfo.messages.subClass.Rstr;
+import ru.opencode.bankinfo.messages.subClass.RstrList;
 
 import java.util.List;
-import java.util.Set;
 
 public class MessageMapper {
-
-    @Autowired
-    private EntryMapper entryMapper;
-
-    //MessageDTO messageToDTO(EMessageEntity message);
 
     public EMessageEntity DTOToMessage(MessageDTO dto){
         EMessageEntity message = new EMessageEntity(dto.getEdNo(), dto.getEdDate(), dto.getEdAuthor(),
@@ -26,16 +18,95 @@ public class MessageMapper {
         message.setEdReceiver(dto.getEdReceiver());
         message.setAuditFields(dto.getAuditFields());
 
-        message.setEntriesId(dto.getEntries().stream()
-                .map(e -> entryMapper.DTOToEntry(e).getId())
-                .toList());
-
         return message;
     };
 
-    //List<MessageDTO> messagesToDTO(List<EMessageEntity> entities);
+    public Entry DTOToEntry(EntryDTO dto, Long messageId){
+        Entry entry = new Entry(
+                messageId,
+                dto.getBIC(),
+                DTOToParticipant(dto.getParticipantInfoDTO()));
 
-    //Set<MessageDTO> messagesToDTO(Set<EMessageEntity> entities);
+        if(dto.getAccounts() != null) {
+            entry.setAccounts(dto.getAccounts()
+                    .stream()
+                    .map(a -> DTOToAccount(a, entry)).toList());
+        }
 
-    //void updateMessageFromDTO(MessageDTO dto, EMessageEntity entity);
+        if(dto.getSwbics() != null) {
+            entry.setSwbics(dto.getSwbics()
+                    .stream()
+                    .map(s -> DTOToSWBIC(s, entry)).toList());
+        }
+
+        entry.setChangeType(dto.getChangeType());
+
+        return entry;
+    }
+
+    public SWBIC DTOToSWBIC(SWBICDTO dto, Entry entry){
+        return new SWBIC(entry, dto.getSWBIC(), dto.getDefaultSWBIC());
+    }
+
+    public Account DTOToAccount(AccountDTO dto, Entry entry){
+        Account account = new Account(entry,
+                dto.getAccount(),
+                dto.getRegulationAccountType(),
+                dto.getAccountCBRBIC(),
+                dto.getDateIn());
+
+        account.setAccountStatus(dto.getAccountStatus());
+        account.setDateOut(dto.getDateOut());
+        account.setControlKey(dto.getControlKey());
+        account.setAccRstrList(DTOToAccRstrList(dto.getAccRstrLists()));
+
+        return account;
+    }
+
+    public Participant DTOToParticipant(ParticipantInfoDTO dto){
+        Participant participant = new Participant(
+                dto.getNameP(),
+                dto.getRgn(),
+                dto.getDateIn(),
+                dto.getPtType(),
+                dto.getSrvcs(),
+                dto.getXchType(),
+                dto.getUID());
+
+        participant.setAdr(dto.getAdr());
+        participant.setParticipantStatus(dto.getParticipantStatus());
+        participant.setNnp(dto.getNnp());
+        participant.setInd(dto.getInd());
+        participant.setDateOut(dto.getDateOut());
+        participant.setCntrCd(dto.getCntrCd());
+        participant.setRegN(dto.getRegN());
+        participant.setTnp(dto.getTnp());
+        participant.setPrntBic(dto.getPrntBic());
+        participant.setRstrList(DTOToRstrList(dto.getRstrList()));
+
+        return participant;
+    }
+
+    public RstrList DTOToAccRstrList(List<AccRstrListDto> dtos){
+        RstrList list = new RstrList();
+
+        if(dtos != null) {
+            dtos.stream().map(d -> new AccRstr(d.getAccRstr(),
+                    d.getAccRstrDate(),
+                    d.getSuccessorBIC())).forEach(list::add);
+        }
+
+        return list;
+    }
+
+    public RstrList DTOToRstrList(List<RstrListDto> dtos){
+        RstrList list = new RstrList();
+
+        if(dtos != null) {
+            dtos.stream().map(d -> new Rstr(d.getAccRstr(),
+                    d.getAccRstrDate())).forEach(list::add);
+        }
+
+        return list;
+    }
 }

@@ -5,9 +5,11 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ru.opencode.bankinfo.core.utils.Audit;
-import ru.opencode.bankinfo.messages.entity.subClass.RstrList;
+import ru.opencode.bankinfo.messages.subClass.AccRstr;
+import ru.opencode.bankinfo.messages.subClass.RstrList;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Accounts"/*, schema = "main"*/)
@@ -24,6 +26,8 @@ public class Account {
     @Setter(AccessLevel.PRIVATE)
     private Long id;
 
+    @NonNull
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "entry_id", nullable = false)
     private Entry entry;
