@@ -1,15 +1,82 @@
 # Банковский справочник
+Веб-приложение для администрирования справочной информации о кредитно-финансовых учреждениях. (backend-part)
+## Содержание
 
----
+- [Стек технологий](#стек-технологий)
+- [Описание проекта](#описание-проекта)
+- [Инструкция для запуска](#инструкция-для-запуска)
 
-### Документация
+## Стек технологий
+Основной backend-стек:
+- Java 17
+- H2-Database
+- Spring Boot
+- Spring Data JPA
+- Spring Web
+- MapStruct
+- Lombok
+- JAXB
 
----
+Для развертывания и тестирования:
+- Docker / Docker-Compose
+- SwaggerHub / SwaggerEditor
+## Описание проекта
+Данный проект разработан для администрирования справочной информации о кредитно-финансовых учреждениях.
+- [Общий функционал](#общий-функционал)
+- [Справочники](#сборник-справочников)
+- [Электронные сообщения](#электронные-сообщения)
+### Общий функционал
+- Использован архитектурный подход Spring MVC.
+- Аудирование. При создании/изменении информации, сохраняются данные о дате и времени проведенных операций. 
+- *(в разработке)* Logger. Фиксация обрабатываемых запросов для отслеживания работы backend-сервиса.
+### Сборник справочников
+- Возможность хранения, добавления, изменения справочной информации в форматах описанных в *"ОБМЕН С КЛИЕНТАМИ БАНКА РОССИИ.
+КОДОВЫЕ ЗНАЧЕНИЯ РЕКВИЗИТОВ ЭС"*
+- Интерфейс для работы со справочниками
+![Сборник справочников]()
+- Схема базы данных для справочника
+![Схема БД - справочник]()
+### Электронные сообщения
+- Механизм пакетного обновления. Обновление справочных данных на основе предоставляемых сведений ЦБ РФ, публикуемого по адресу: http://cbr.ru/Psystem/system_p/ (Справочник БИК – файл в формате XML).
+- Механизм ручного добавления xml-файлов. Возможность добавлять собственные xml-файлы соответсвующие формату электронных сообщений ЦБ РФ.
+- Интерфейс для работы с электронными сообщениями
 
-- Схема [API](https://app.swaggerhub.com/apis/MROBINGOOOD/Bank-Info-OpenCode-Practice/0.0.1#/);
-- Структура БД:
-    
-  - Для записей:\
-![](https://lh3.googleusercontent.com/fife/APg5EOZug_gYEwU0Hn2iuXfASQJrLFiqZIuNzT2Tao3wL64X-fXOPLkZJswfyxInVk21vwxeiyJN1tUk5uqT1QduB4LyS0Lo7bUkzhcz8ARhrAnsaNn0_h84JrTID0HN9mwFcgtAiYpdtgHS8Rdm6JdZqOtGvIUNuWMi1fB1QQQmMSTzc22bm9xBhmqW_e-tAwAI4bdBOL7R8rgHHvXy80sz9m355tcIjceBgeckuJpnYCiqjx2c1NEIQNChHgrFlve283f_nqFI5ypm-bSwL9Blxd9xb_ZTw1b_53eheG5LQ3I2f-hPKzniTd74sG-IdGIWjgHkm2P_AxluLQbNuUj1mnrMMwbMe6QctA2pd6ODqd7gDKIYWbBRZVNwN8NRcoW6fYTKLehChdziY6bq_lSQZkdzPsQw5kQjlKdQxErhJZzERK9fPzAvx4wGAy18qausmr8bxW2cNP-TuV-o7WrM99JR2Nx5-h7nx4ABvOtxkTw7h_jTvHQ8jTXx4sru1zodfb_duTHp0bsXoLM2ynmCVUWK0ez1v-FawLbmT14V8VyECvrts1MfIl6l-cc8yzHcKOglxF0BTyuy4OkN3zCNq6KK9W0AXCJYg_1mcit6HK-JQhNmKyTXUON_uJqPyV4PsJZ3HEWp4uPHwX70GKM5ZXE86BBsq6iPciYTW-MKjR-QM7HCxNzXQbM36aDWcGBivSt7934dmXXfDdXJ6IHzjGh_zU0R_o77eRKYFcwLDP5RNYHXk47MzlyzEwVDmYc8JyXnW2ni-aRfGLpdtzWvWE7hbDxXTNPydRU5y-aZ8jhrnIKOGqc5g6V-v00B6SFa3UdAaZ0RHAshx1aobSlleOWv6fAVESs1XQenO_A6x7XChXZHskxvUv8YmBqWQh-CZE6pYIb1Be8iRHz-ZqXAN38SunugLD2E8IOSc5Mp3qmkl4LM51za2YUhG91sjEez0dZAs6A6PWTHv-KB2hOK0ailv670C_1FUS8EibMdJVQN9NNTbkFHfiwgZ2KB1IcOo6ysAS2DTGFzD27qU-71T222f9gqtgPLNdc5IC4g35HNdCEBXOzo3o7Puepzs3J3kjN1VeRL_KnsuwMh4j9ILpsifaPF0tFuWIFQpXtjzIyZVnMLY0psSu11HLWmfpF3cuDqrb42oNr5jNuCBEORF38IpfQF-CpGDTDGYRjID3mwRL5eSITwO0ulKg0GAsA-SeAhTs4oor0bI7M0zYtoraJIsSDv7YTYAdC4koByZN-rmp4vB2yGou2o4QJor7oo34XGBIh6-9skXQfmSN9xTJsbD23MtW7dxkOekeWD9EOmfXVP53Q2CeqzHWO5LpUKFpPtqG807K4mTwWRRrdddzmZNx_SkZ3_1cCTwSmb5WkoYQEAJKhtyBWdHlH6TO4OBXFt5Lq6ZBDX9VFbBcfQ7caGDomd2CESCbceOlmpLNL5Zz9g0EGnc_y49oCLP33l9ZxKFRrCrqDDlzt7J9_Ogw9mkZKUb74iqY5e_I0JMCrz53N1tYRckBj0X-zKeblHtax60DnFXc_qpHo8FrxsXO-duBtAOEri-0jb5PZKb1yKyDE=w1366-h662)
-  - Для справочников:\
-![](https://lh3.googleusercontent.com/fife/APg5EOYmt3KVmaIlHvDth_iZQ4t7w0hIx57HyAB4x-yoE3lbzfNPheOJZdAiGIW1QJ4k3ZvOevx_Q3FqM_tLi29dl7XYGygy9AZNbnlRoGl_FydCUmVoOnWFkgwrHhEuwB5XF2Fq_HGOhI4lHNx2gDVYFugUjTms2iXukwZCt69gqPnuO3CO7HgKFgYTzlYDkPfEMX_7TPjO5t2_pw1W0nXM1kZlFsZaiZ1oqyeKw22uZQxYC9f120PFKUPr1cvSq3Rr3Ad04Jv5wVygStvyEJwUSNIdpApqMgNc4a0Idp76yJThEauX4t8R3tujTqb07ph11F-f8KSuMWE6qrDt-VB4-p9jIsi-RcJdgBIafuZxjb4FywogNxXtcBChuxxWH6qhWgGBVytJ91000dCWJSRs2AX9MkPxmfomHGdwZwkpUO7NsuAW3ynijUSNjzsg8gYbg1gWoLAGPDy75EfXwW6g6S7Ekc-Y6SDDpiIOwLNNqjElXFgjI7TDfEnMrw3Y0mva6fGemc-uwSxGcn4pGP5nv5SM32s8ZyRMzdgyYocOR8g_K6k42JYllZfN0Z6X6qcn5_Pv1kBjUhrPPB9kBdDJES83lpwTKIqYpKEuOx-pEGleLuoslpa2d0UVTS4qxma_RvAN7A-EpE94i3VLE68UVwwkBBTfvweZQrKNRlvWvKqkvwPKODzVqrrmTKGByOMhEPaXqewQOFms3lm0qqDheqPwuG6kWPjXpoO9EFhBwwdDGBNey439rupSEPxPy1biSDQnycMsEZi6JtXVLrLKEw9tk7_PlnzK6_B643guQC84OVU12SOqVY3TBpc2-z9XuEz_kqCudurHJIEN8pRH9O-lhkEPpx1Db3oEpGpH8NpKSO9V-yDbjMM690SxMgA8heD_IUtMgTyEtPZ-3gggKLObOTxuySJjjnkg525R7cN4DxAv7YVNt6OBKiGF0yqTTrPeaFumerWc-zyKuLPian8O50Yan_KnAYIwGTeLXzs_IoxnncgZdvDKbVQzwFhgRnRdcOXaoMX4L23GRn9LTXl9cuWIIkM4iUuA0DMPXe42Bkqnf8SXxOHU80WIi5eusvkWrDY4I2ZTlxWw8SVQQfnI6k-TdFmsJqLTYRAcxN2ltEW2o3kzKUVyJNShPJefaDJu3FY4fumzFEvUoyj99LrwSm2WnhbJySRnxGHz-470YrvrGqYbh0hh3wmDmpjF0LaSKDpWesKIAXeA5gh6XaPswJ1nkJb34agbFFbl3Ab3Jdo_jUrl98JSSLp5WbYXoYwx4LIzWHPlcZOUqaZaqN0aIcPnBmzqLGPg_fRdquaQKMT-UQ5kk3tIbbSh_l3g8msrgVV7ovPDdauxE_KdMeWQ1l_2X1cKk8rYyOoM9CoLbDYtV34_trUAlbb1IVACv1OlMQtrqoe-MTkZAv1oYxJxb0iHPWGLiySqZZ53jTgQLmFY0G5c7uL-6CXUDGQOnz35a-sBwq4qUl4_iDzVVlyA0Nu-LIRnhF2yyTb8-5uCavUz4oIENWPI2bp9LNIT0aPnWY6kkV83hkTls76t6Vq7q_c9wtR2auycRhdjee3QOkc=w1366-h662)
+*(в разработке)*
+
+- Схема базы данных для электронных сообщений
+![Схема БД - электронные сообщения]()
+
+Исходный код проекта:
+- [Backend(server) репозиторий](https://github.com/MrRobinGoood/Bank-Info)
+- [Frontend(client) репозиторий](https://github.com/Matveyx25/open-code-test)
+
+## Инструкция для запуска
+### Тестирование на удалённом сервере
+Для нашего проекта запущен и доступен онлайн прототип веб-приложения.
+
+[Ссылка на прототип](http://178.170.193.201:3000/)
+- 
+Для тестирования бэкенд-сервиса вы можете воспользоваться документацией OpenAPI 3.0 на SwaggerHub
+
+[Ссылка на OpenAPI](https://app.swaggerhub.com/apis-docs/MROBINGOOOD/Bank-Info-OpenCode-Practice/0.0.3) 
+-
+### Тестирование на локальной машине
+____
+#### Документация OpenAPI 3.0
+Для нашего проекта доступна документация формата OpenAPI 3.0. [Ссылка на онлайн документацию](https://app.swaggerhub.com/apis/MROBINGOOOD/Bank-Info-OpenCode-Practice/0.0.3#/)
+
+Для локального просмотра документации склонируйте [openapi.yaml](...), а затем импортируйте его в [SwaggerEditor](https://editor.swagger.io/).
+____
+#### Запуск контейнеров Docker-Compose
+Вы можете воспользоваться созданными контейнерами docker:
+- Установите docker и docker-compose
+- Склонируйте файл [docker-compose.yml](...)
+- Запустите docker-compose файл(из командной строки находясь в той же директории что и файл) командой ```docker compose up -d```
+
+После этого у вас будут запущены оба контейнера client-server и вы сможете подключиться к ним по адресу ```http://localhost:3000/```
+
+*(для доступа только к backend-сервису по адресу ```http://localhost:8081/```)*
+____
+#### Ручной запуск
+##### Запуск backend(server)
+##### Запуск frontend(client)
