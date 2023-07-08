@@ -22,11 +22,6 @@ public class Info extends Audit{
     private Long id;
     @Column(nullable = false)
     private String name;
-//    @Embedded
-//    private Audit audit;
-
-//    @Column(name = "is_deleted", columnDefinition = "boolean default false")
-//    private Boolean isDeleted = false;
     @JsonIgnore
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "info")
     private List<Manual> manuals;
