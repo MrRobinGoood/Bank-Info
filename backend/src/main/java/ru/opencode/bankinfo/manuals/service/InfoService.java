@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.opencode.bankinfo.manuals.dto.InfoCreationDTO;
-import ru.opencode.bankinfo.core.utils.ConfigPagination;
+import ru.opencode.bankinfo.core.config.PaginationConfig;
 import ru.opencode.bankinfo.manuals.entity.Info;
 import ru.opencode.bankinfo.manuals.entity.Manual;
 import ru.opencode.bankinfo.manuals.exception.InfoNotFoundException;
@@ -38,7 +38,7 @@ public class InfoService {
 
         List<Object> infoPageWithPaginateConfig = new ArrayList<>();
         infoPageWithPaginateConfig.add(infoPage.getContent());
-        infoPageWithPaginateConfig.add(new ConfigPagination(infoPage.getTotalPages(),infoPage.getTotalElements()));
+        infoPageWithPaginateConfig.add(new PaginationConfig(infoPage.getTotalPages(),infoPage.getTotalElements()));
         return infoPageWithPaginateConfig;
     }
 

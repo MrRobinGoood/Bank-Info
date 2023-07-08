@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.core.utils;
+package ru.opencode.bankinfo.core.config;
 
 import lombok.*;
 
@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-public class ConfigPagination {
+public class PaginationConfig {
     private Integer countOfPages;
     private Long countOfItems;
 

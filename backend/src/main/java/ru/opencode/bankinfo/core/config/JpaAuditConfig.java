@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.core.exception.config;
+package ru.opencode.bankinfo.core.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;

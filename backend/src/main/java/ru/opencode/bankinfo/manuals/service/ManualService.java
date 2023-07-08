@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import ru.opencode.bankinfo.manuals.dto.ManualCreationDTO;
-import ru.opencode.bankinfo.core.utils.ConfigPagination;
+import ru.opencode.bankinfo.core.config.PaginationConfig;
 import ru.opencode.bankinfo.manuals.entity.Info;
 import ru.opencode.bankinfo.manuals.entity.Manual;
 import ru.opencode.bankinfo.manuals.exception.ManualNotFoundException;
@@ -53,7 +53,7 @@ public class ManualService {
         );
         List<Object> manualPageWithPaginateConfig = new ArrayList<>();
         manualPageWithPaginateConfig.add(manualPage.getContent());
-        manualPageWithPaginateConfig.add(new ConfigPagination(manualPage.getTotalPages(),manualPage.getTotalElements()));
+        manualPageWithPaginateConfig.add(new PaginationConfig(manualPage.getTotalPages(),manualPage.getTotalElements()));
         return manualPageWithPaginateConfig;
     }
 
