@@ -1,13 +1,19 @@
 package ru.opencode.bankinfo.messages.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
+import ru.opencode.bankinfo.config.PaginationConfig;
 import ru.opencode.bankinfo.exception.InvalidParametersException;
 import ru.opencode.bankinfo.exception.NotFoundException;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
+import ru.opencode.bankinfo.messages.dto.subDTO.EMessageNameDTO;
 import ru.opencode.bankinfo.messages.dto.subDTO.EntryDTO;
 import ru.opencode.bankinfo.messages.entity.Account;
 import ru.opencode.bankinfo.messages.entity.EMessageEntity;
@@ -23,6 +29,7 @@ import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -51,20 +58,30 @@ public class MessageService {
     private final MessageMapper mapper = new MessageMapper();
 
     public EMessageEntity getMessageById(Long id) {
-        return messageRepo.findById(id).orElseThrow(() -> new NotFoundException("Message not found"));
+        return messageRepo.findById(id).orElseThrow(() -> new NotFoundException("Message with id:" + id + " not found"));
     }
 
-    public List<EMessageEntity> getMessages() {
-        return messageRepo.findAll();
+    public List<Object> getMessages(String messageName, LocalDateTime localDateTimeStart,LocalDateTime localDateTimeEnd,Boolean isDeleted, Integer pageNo, Integer pageSize) {
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by("id"));
+        Page<EMessageEntity> eMessagePage = messageRepo.findAllByeMessageNameContainsAndCreateDateTimeGreaterThanEqualAndCreateDateTimeLessThanEqualAndIsDeletedEquals(
+                messageName,
+                localDateTimeStart,
+                localDateTimeEnd,
+                isDeleted,
+                pageable
+        );
+        List<Object> eMessagePageWithPaginateConfig = new ArrayList<>();
+        eMessagePageWithPaginateConfig.add(eMessagePage.getContent());
+        eMessagePageWithPaginateConfig.add(new PaginationConfig(eMessagePage.getTotalPages(),eMessagePage.getTotalElements()));
+        return eMessagePageWithPaginateConfig;
     }
 
 
-    public void createMessage(MessageDTO dto) {
+    public EMessageEntity createMessage(MessageDTO dto) {
         try {
 
             EMessageEntity message = mapper.DTOToMessage(dto);
             messageRepo.save(message);
-
             List<Entry> entries = createEntriesForMessage(dto, message);
             entryRepo.saveAll(entries);
 
@@ -97,15 +114,16 @@ public class MessageService {
 
             fillMessage(entries, message);
             messageRepo.save(message);
+            return message;
         } catch (RuntimeException e) {
             System.out.println(e);
             throw new InvalidParametersException("Invalid parameters for creating message");
         }
     }
 
-    public void updateMessageName(Long id, String name) {
+    public void updateMessageName(Long id, EMessageNameDTO eMessageNameDTO) {
         EMessageEntity message = getMessageById(id);
-        message.setEMessageName(name);
+        message.setEMessageName(eMessageNameDTO.getName());
         messageRepo.save(message);
     }
 
@@ -130,11 +148,12 @@ public class MessageService {
         return entriesId.stream().map(this::getEntry).toList();
     }
 
-    public void createMessageByXml(MultipartFile multifile) throws JAXBException, IOException, ParserConfigurationException, SAXException {
+    public EMessageEntity createMessageByXml(MultipartFile multifile) throws JAXBException, IOException, ParserConfigurationException, SAXException {
         File file = XmlToPOJO.convertMultipartFileToFile(multifile);
         Document document = XmlToPOJO.fileToDocument(file);
         MessageDTO dto = XmlToPOJO.xmlToPOJO(XmlToPOJO.documentToString(document));
-        createMessage(dto);
+        dto.setEMessageName(file.getName());
+        return createMessage(dto);
     }
 
     private List<Entry> createEntriesForMessage(MessageDTO dto, EMessageEntity message) {
