@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ru.opencode.bankinfo.messages.entity.subClass.RstrList;
 
+import ru.opencode.bankinfo.util.AuditP;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -16,7 +18,7 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Participant {
+public class Participant extends AuditP {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include
@@ -80,19 +82,4 @@ public class Participant {
     @Column(length = 500)
     private RstrList rstrList;
 
-    private Boolean isDeletedP = false;
-
-//    @NonNull
-//    @NotNull
-//    @Column(nullable = false)
-    private Long createdByP;
-
-//    @NonNull
-//    @NotNull
-//    @Column(nullable = false)
-    private LocalDateTime createDateTimeP;
-
-    private Long changeByP;
-
-    private LocalDateTime changeDateTimeP;
 }
