@@ -14,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "Accounts"/*, schema = "main"*/)
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

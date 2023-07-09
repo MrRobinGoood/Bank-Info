@@ -10,6 +10,7 @@ import ru.opencode.bankinfo.util.Audit;
 @Entity
 @Table(name = "SWBICS"/*, schema = "main"*/)
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)

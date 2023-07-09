@@ -41,7 +41,7 @@ public class MessageMapper {
         }
 
         entry.setChangeType(dto.getChangeType());
-        setEntryForRstrs(entry, entry.getParticipant().getRstrList());
+        setEntryForRstrs(entry, entry.getParticipantInfo().getRstrList());
 
         return entry;
     }

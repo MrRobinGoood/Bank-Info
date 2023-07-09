@@ -1,5 +1,6 @@
 package ru.opencode.bankinfo.messages.entity.subClass;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class AccRstr {
 
     @Id
@@ -33,7 +35,7 @@ public class AccRstr {
     private LocalDate rstrDate;
 
     private Long successorBIC;
-
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "account_id", nullable = false)
     private Account account;

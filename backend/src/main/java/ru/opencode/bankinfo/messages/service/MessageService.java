@@ -102,9 +102,9 @@ public class MessageService {
                 if (entry.getSwbics() != null) {
                     swbics.addAll(entry.getSwbics());
                 }
-                if(entry.getParticipant().getRstrList() != null &&
-                        !entry.getParticipant().getRstrList().isEmpty()) {
-                    rstrs.addAll(entry.getParticipant().getRstrList());
+                if(entry.getParticipantInfo().getRstrList() != null &&
+                        !entry.getParticipantInfo().getRstrList().isEmpty()) {
+                    rstrs.addAll(entry.getParticipantInfo().getRstrList());
                 }
             }
             accountRepo.saveAll(accounts);
@@ -143,9 +143,30 @@ public class MessageService {
         return entryRepo.findById(id).orElseThrow(() -> new NotFoundException("Entry not found"));
     }
 
-    public List<Entry> getEntriesByMessageId(Long id) {
-        List<Long> entriesId = getMessageById(id).getEntriesId();
-        return entriesId.stream().map(this::getEntry).toList();
+    public List<Object> getEntriesByEMessageId(Long emessageId, Byte participantType, String nameP, String bic , Integer pageNo, Integer pageSize) {
+        getMessageById(emessageId);
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by("id"));
+        Page<Entry> entryPage;
+        if (participantType != null){
+        entryPage = entryRepo.findEntryByMessageIdAndParticipantInfo_PtTypeEqualsAndParticipantInfo_NamePContainsAndBICContains(
+                emessageId,
+                participantType,
+                nameP,
+                bic,
+                pageable
+        );}
+        else {
+            entryPage = entryRepo.findEntryByMessageIdAndParticipantInfo_NamePContainsAndBICContains(
+                    emessageId,
+                    nameP,
+                    bic,
+                    pageable
+            );
+        }
+        List<Object> entryPageWithPaginateConfig = new ArrayList<>();
+        entryPageWithPaginateConfig.add(entryPage.getContent());
+        entryPageWithPaginateConfig.add(new PaginationConfig(entryPage.getTotalPages(),entryPage.getTotalElements()));
+        return entryPageWithPaginateConfig;
     }
 
     public EMessageEntity createMessageByXml(MultipartFile multifile) throws JAXBException, IOException, ParserConfigurationException, SAXException {
