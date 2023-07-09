@@ -109,12 +109,5 @@ public class XmlToPOJO {
         Unmarshaller unmarshaller = context.createUnmarshaller();
         return (MessageDTO) unmarshaller.unmarshal(reader);
     }
-//    public static void main(String[] args) throws JAXBException, IOException, ParserConfigurationException, SAXException {
-////        LocalDate localDate = LocalDate.now();
-////        downoloadXML(localDate);
-//        Document document = getDocument("backend/src/main/resources/20230703_ED807_full.xml");
-//        String xml = documentToString(document);
-//        MessageDTO message = xmlToPOJO(xml);
-//        System.out.println(message);
-//    }
+
 }

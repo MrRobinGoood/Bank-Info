@@ -14,6 +14,7 @@ import ru.opencode.bankinfo.exception.InvalidParametersException;
 import ru.opencode.bankinfo.exception.NotFoundException;
 import ru.opencode.bankinfo.manuals.entity.Manual;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
+import ru.opencode.bankinfo.messages.dto.subDTO.EMessageNameDTO;
 import ru.opencode.bankinfo.messages.dto.subDTO.EntryDTO;
 import ru.opencode.bankinfo.messages.entity.Account;
 import ru.opencode.bankinfo.messages.entity.EMessageEntity;
@@ -53,7 +54,7 @@ public class MessageService {
     private final MessageMapper mapper = new MessageMapper();
 
     public EMessageEntity getMessageById(Long id) {
-        return messageRepo.findById(id).orElseThrow(() -> new NotFoundException("Message not found"));
+        return messageRepo.findById(id).orElseThrow(() -> new NotFoundException("Message with id:" + id + " not found"));
     }
 
     public List<Object> getMessages(String messageName, LocalDateTime localDateTimeStart,LocalDateTime localDateTimeEnd, Integer pageNo, Integer pageSize) {
@@ -76,7 +77,6 @@ public class MessageService {
 
             EMessageEntity message = mapper.DTOToMessage(dto);
             messageRepo.save(message);
-            message.setEMessageName(message.getId().toString());
             List<Entry> entries = createEntriesForMessage(dto, message);
             entryRepo.saveAll(entries);
 
@@ -101,9 +101,9 @@ public class MessageService {
         }
     }
 
-    public void updateMessageName(Long id, String name) {
+    public void updateMessageName(Long id, EMessageNameDTO eMessageNameDTO) {
         EMessageEntity message = getMessageById(id);
-        message.setEMessageName(name);
+        message.setEMessageName(eMessageNameDTO.getName());
         messageRepo.save(message);
     }
 
@@ -132,6 +132,7 @@ public class MessageService {
         File file = XmlToPOJO.convertMultipartFileToFile(multifile);
         Document document = XmlToPOJO.fileToDocument(file);
         MessageDTO dto = XmlToPOJO.xmlToPOJO(XmlToPOJO.documentToString(document));
+        dto.setEMessageName(file.getName());
         createMessage(dto);
     }
 

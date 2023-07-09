@@ -1,5 +1,6 @@
 package ru.opencode.bankinfo.messages.controller;
 
+import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,6 +9,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import ru.opencode.bankinfo.manuals.dto.PaginatedResponseDTO;
+import ru.opencode.bankinfo.messages.dto.subDTO.EMessageNameDTO;
 import ru.opencode.bankinfo.messages.entity.EMessageEntity;
 import ru.opencode.bankinfo.messages.entity.Entry;
 import ru.opencode.bankinfo.messages.service.MessageService;
@@ -45,9 +47,9 @@ public class MessageController {
     public void updateMessageName
             (
                     @PathVariable @Min(1) Long id,
-                    @RequestBody String name
-            ) {
-        service.updateMessageName(id, name);
+                    @RequestBody @Valid EMessageNameDTO eMessageNameDTO
+                    ) {
+        service.updateMessageName(id, eMessageNameDTO);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
