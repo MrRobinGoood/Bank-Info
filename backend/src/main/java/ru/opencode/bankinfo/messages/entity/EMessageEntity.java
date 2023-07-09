@@ -1,5 +1,6 @@
 package ru.opencode.bankinfo.messages.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,6 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "EMessages"/*, schema = "main"*/)
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -26,7 +28,7 @@ public class EMessageEntity extends Audit {
     private Long id;
 
     private String eMessageName;
-
+    @JsonIgnore
     private List<Long> entriesId;
 
     @NonNull
