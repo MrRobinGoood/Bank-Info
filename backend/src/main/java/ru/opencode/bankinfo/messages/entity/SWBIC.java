@@ -1,5 +1,6 @@
 package ru.opencode.bankinfo.messages.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -23,6 +24,8 @@ public class SWBIC {
 
     @NonNull
     @NotNull
+    @JsonIgnore
+    @ToString.Exclude
     @ManyToOne
     @JoinColumn(name = "entry_id", nullable = false)
     private Entry entry;

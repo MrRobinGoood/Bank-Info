@@ -79,7 +79,7 @@ public class Participant {
     private String UID;
 
     private String participantStatus;
-
+    @Column(length = 300)
     private RstrList rstrList;
 
     private Boolean isDeletedP = false;
