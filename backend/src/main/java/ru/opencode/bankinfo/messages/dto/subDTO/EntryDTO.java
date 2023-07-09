@@ -50,7 +50,5 @@ public class EntryDTO {
 
     private List<AccountDTO> accounts;
 
-    @Embedded
-    private Audit auditFields;
 
 }
