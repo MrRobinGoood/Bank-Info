@@ -4,7 +4,7 @@ import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import ru.opencode.bankinfo.core.utils.Audit;
+import ru.opencode.bankinfo.util.Audit;
 
 import javax.xml.bind.annotation.*;
 import java.time.LocalDateTime;

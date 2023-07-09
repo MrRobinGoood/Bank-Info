@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.core.exception;
+package ru.opencode.bankinfo.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

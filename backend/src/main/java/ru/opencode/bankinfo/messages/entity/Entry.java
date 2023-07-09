@@ -5,10 +5,9 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.opencode.bankinfo.core.utils.Audit;
+import ru.opencode.bankinfo.util.Audit;
 
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Table(name = "Entries"/*, schema = "main"*/)

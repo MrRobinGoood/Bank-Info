@@ -12,7 +12,7 @@ import lombok.NonNull;
 import ru.opencode.bankinfo.adapter.LocalDateAdapter;
 import ru.opencode.bankinfo.adapter.LocalDateTimeAdapter;
 import ru.opencode.bankinfo.messages.dto.subDTO.EntryDTO;
-import ru.opencode.bankinfo.core.utils.Audit;
+import ru.opencode.bankinfo.util.Audit;
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;

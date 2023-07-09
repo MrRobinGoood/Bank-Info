@@ -3,9 +3,9 @@ package ru.opencode.bankinfo.messages.mapper;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
 import ru.opencode.bankinfo.messages.dto.subDTO.*;
 import ru.opencode.bankinfo.messages.entity.*;
-import ru.opencode.bankinfo.messages.subClass.AccRstr;
-import ru.opencode.bankinfo.messages.subClass.Rstr;
-import ru.opencode.bankinfo.messages.subClass.RstrList;
+import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
+import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
+import ru.opencode.bankinfo.messages.entity.subClass.RstrList;
 
 import java.util.List;
 
