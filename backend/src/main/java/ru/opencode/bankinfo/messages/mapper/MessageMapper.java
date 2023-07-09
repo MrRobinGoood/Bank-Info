@@ -16,7 +16,8 @@ public class MessageMapper {
                 dto.getCreationReason(), dto.getCreationTime(), dto.getInfoTypeCode(), dto.getBusinessDay());
         message.setEMessageName(dto.getEMessageName());
         message.setEdReceiver(dto.getEdReceiver());
-        message.setAuditFields(dto.getAuditFields());
+
+//        message.setAuditFields(dto.getAuditFields());
 
         return message;
     };

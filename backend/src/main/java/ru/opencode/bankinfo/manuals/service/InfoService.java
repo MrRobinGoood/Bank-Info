@@ -42,8 +42,9 @@ public class InfoService {
         return infoPageWithPaginateConfig;
     }
 
-    public void createInfo(Info info) {
-        infoRepository.save(info);
+    public Long createInfo(Info info) {
+       Info savedInfo = infoRepository.save(info);
+       return savedInfo.getId();
     }
 
     public void updateInfo(Long id, InfoCreationDTO infoCreationDTO) {
@@ -57,6 +58,15 @@ public class InfoService {
         info.setIsDeleted(true);
         for (Manual manual : info.getManuals()) {
             manual.setIsDeleted(true);
+        }
+        infoRepository.save(info);
+    }
+
+    public void restoreInfo(Long id) {
+        Info info = getInfo(id);
+        info.setIsDeleted(false);
+        for (Manual manual : info.getManuals()) {
+            manual.setIsDeleted(false);
         }
         infoRepository.save(info);
     }

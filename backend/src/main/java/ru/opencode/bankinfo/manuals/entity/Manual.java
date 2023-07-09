@@ -3,8 +3,7 @@ package ru.opencode.bankinfo.manuals.entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-
-import java.time.LocalDateTime;
+import ru.opencode.bankinfo.util.Audit;
 
 @Table(name = "manuals")
 @Entity
@@ -13,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Manual {
+public class Manual extends Audit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
@@ -22,18 +21,8 @@ public class Manual {
 
     @Column(nullable = false)
     private String code;
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1024)
     private String description;
-    @Column(name = "c_time")
-    private LocalDateTime cTime;
-    @Column(name = "c_user")
-    private Long cUser;
-    @Column(name = "e_time")
-    private LocalDateTime eTime;
-    @Column(name = "e_user")
-    private Long eUser;
-    @Column(name = "is_deleted", columnDefinition = "boolean default false")
-    private Boolean isDeleted = false;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "info_id")

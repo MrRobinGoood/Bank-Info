@@ -17,7 +17,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class EMessageEntity {
+public class EMessageEntity extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -68,6 +68,4 @@ public class EMessageEntity {
     @Column(nullable = false)
     private LocalDate businessDay;
 
-    @Embedded
-    private Audit auditFields;
 }

@@ -16,7 +16,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Entry {
+public class Entry extends Audit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -51,6 +51,4 @@ public class Entry {
     @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Account> accounts;
 
-    @Embedded
-    private Audit auditFields;
 }

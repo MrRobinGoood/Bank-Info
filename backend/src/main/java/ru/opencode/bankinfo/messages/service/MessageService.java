@@ -53,6 +53,7 @@ public class MessageService {
         return messageRepo.findAll();
     }
 
+
     public void createMessage(MessageDTO dto) {
         try {
 
@@ -91,13 +92,13 @@ public class MessageService {
 
     public void deleteMessage(Long id) {
         EMessageEntity message = getMessageById(id);
-        message.getAuditFields().setIsDeleted(true);
+        message.setIsDeleted(true);
         messageRepo.save(message);
     }
 
     public void restoreMessage(Long id) {
         EMessageEntity message = getMessageById(id);
-        message.getAuditFields().setIsDeleted(false);
+        message.setIsDeleted(false);
         messageRepo.save(message);
     }
 

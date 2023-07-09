@@ -9,7 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import ru.opencode.bankinfo.adapter.LocalDateAdapter;
-import ru.opencode.bankinfo.util.Audit;
+
 
 import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
@@ -58,6 +58,4 @@ public class AccountDTO {
     @XmlElement(name = "AccRstrList", namespace = "urn:cbr-ru:ed:v2.0")
     private List<AccRstrListDto> accRstrLists;
 
-    @Embedded
-    private Audit auditFields;
 }

@@ -4,7 +4,6 @@ import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import ru.opencode.bankinfo.util.Audit;
 
 import javax.xml.bind.annotation.*;
 import java.time.LocalDateTime;
@@ -48,8 +47,10 @@ public class EntryDTO {
     @XmlElement(name = "SWBICS", namespace = "urn:cbr-ru:ed:v2.0")
     private List<SWBICDTO> swbics;
     @XmlElement(name = "Accounts", namespace = "urn:cbr-ru:ed:v2.0")
+
     private List<AccountDTO> accounts;
 
     @Embedded
     private Audit auditFields;
+
 }

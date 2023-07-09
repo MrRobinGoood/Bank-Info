@@ -14,7 +14,7 @@ import java.time.LocalDate;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Account {
+public class Account extends Audit {
 
     public Account(Entry entry, String account, String regulationAccountType, Long accountCBRBIC, LocalDate dateIn) {
         this.entry = entry;
@@ -70,6 +70,4 @@ public class Account {
     @Column(length = 500)
     private RstrList accRstrList;
 
-    @Embedded
-    private Audit auditFields;
 }
