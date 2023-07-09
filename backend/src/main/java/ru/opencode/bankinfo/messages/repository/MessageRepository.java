@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 public interface MessageRepository extends JpaRepository<EMessageEntity, Long> {
 
-    Page<EMessageEntity> findAllByeMessageNameContainsAndCreateDateTimeGreaterThanEqualAndCreateDateTimeLessThanEqual(String eMessageName, LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd, Pageable pageable);
+    Page<EMessageEntity> findAllByeMessageNameContainsAndCreateDateTimeGreaterThanEqualAndCreateDateTimeLessThanEqualAndIsDeletedEquals(String eMessageName, LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd,Boolean isDeleted, Pageable pageable);
 
 
 }

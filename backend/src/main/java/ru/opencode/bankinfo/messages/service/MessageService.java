@@ -12,7 +12,6 @@ import org.xml.sax.SAXException;
 import ru.opencode.bankinfo.config.PaginationConfig;
 import ru.opencode.bankinfo.exception.InvalidParametersException;
 import ru.opencode.bankinfo.exception.NotFoundException;
-import ru.opencode.bankinfo.manuals.entity.Manual;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
 import ru.opencode.bankinfo.messages.dto.subDTO.EMessageNameDTO;
 import ru.opencode.bankinfo.messages.dto.subDTO.EntryDTO;
@@ -57,12 +56,13 @@ public class MessageService {
         return messageRepo.findById(id).orElseThrow(() -> new NotFoundException("Message with id:" + id + " not found"));
     }
 
-    public List<Object> getMessages(String messageName, LocalDateTime localDateTimeStart,LocalDateTime localDateTimeEnd, Integer pageNo, Integer pageSize) {
+    public List<Object> getMessages(String messageName, LocalDateTime localDateTimeStart,LocalDateTime localDateTimeEnd,Boolean isDeleted, Integer pageNo, Integer pageSize) {
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by("id"));
-        Page<EMessageEntity> eMessagePage = messageRepo.findAllByeMessageNameContainsAndCreateDateTimeGreaterThanEqualAndCreateDateTimeLessThanEqual(
+        Page<EMessageEntity> eMessagePage = messageRepo.findAllByeMessageNameContainsAndCreateDateTimeGreaterThanEqualAndCreateDateTimeLessThanEqualAndIsDeletedEquals(
                 messageName,
                 localDateTimeStart,
                 localDateTimeEnd,
+                isDeleted,
                 pageable
         );
         List<Object> eMessagePageWithPaginateConfig = new ArrayList<>();
