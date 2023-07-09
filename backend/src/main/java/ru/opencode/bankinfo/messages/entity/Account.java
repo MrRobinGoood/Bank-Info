@@ -5,10 +5,11 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
 import ru.opencode.bankinfo.util.Audit;
-import ru.opencode.bankinfo.messages.entity.subClass.RstrList;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Accounts"/*, schema = "main"*/)
@@ -58,7 +59,9 @@ public class Account extends Audit {
     private LocalDate dateOut;
 
     private String accountStatus;
+
     @Column(length = 500)
-    private RstrList accRstrList;
+    @OneToMany(mappedBy = "account", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<AccRstr> accRstrList;
 
 }

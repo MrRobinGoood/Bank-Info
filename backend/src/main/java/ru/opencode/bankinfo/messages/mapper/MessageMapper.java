@@ -5,8 +5,8 @@ import ru.opencode.bankinfo.messages.dto.subDTO.*;
 import ru.opencode.bankinfo.messages.entity.*;
 import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
 import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
-import ru.opencode.bankinfo.messages.entity.subClass.RstrList;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MessageMapper {
@@ -41,6 +41,7 @@ public class MessageMapper {
         }
 
         entry.setChangeType(dto.getChangeType());
+        setEntryForRstrs(entry, entry.getParticipant().getRstrList());
 
         return entry;
     }
@@ -59,7 +60,7 @@ public class MessageMapper {
         account.setAccountStatus(dto.getAccountStatus());
         account.setDateOut(dto.getDateOut());
         account.setControlKey(dto.getControlKey());
-        account.setAccRstrList(DTOToAccRstrList(dto.getAccRstrLists()));
+        account.setAccRstrList(DTOToAccRstrList(dto.getAccRstrLists(), account));
 
         return account;
     }
@@ -83,31 +84,36 @@ public class MessageMapper {
         participant.setRegN(dto.getRegN());
         participant.setTnp(dto.getTnp());
         participant.setPrntBic(dto.getPrntBic());
-        participant.setRstrList(DTOToRstrList(dto.getRstrList()));
+        participant.setRstrList(DTOToRstrList(dto.getRstrList(), participant));
 
         return participant;
     }
 
-    public RstrList DTOToAccRstrList(List<AccRstrListDto> dtos){
-        RstrList list = new RstrList();
+    public List<AccRstr> DTOToAccRstrList(List<AccRstrListDto> dtos, Account account){
+        List<AccRstr> list = new ArrayList<>();
 
         if(dtos != null) {
             dtos.stream().map(d -> new AccRstr(d.getAccRstr(),
                     d.getAccRstrDate(),
-                    d.getSuccessorBIC())).forEach(list::add);
+                    d.getSuccessorBIC(), account)).forEach(list::add);
         }
 
         return list;
     }
 
-    public RstrList DTOToRstrList(List<RstrListDto> dtos){
-        RstrList list = new RstrList();
+    public List<Rstr> DTOToRstrList(List<RstrListDto> dtos, Participant participant){
+        List<Rstr> list = new ArrayList<>();
 
         if(dtos != null) {
-            dtos.stream().map(d -> new Rstr(d.getAccRstr(),
+            dtos.stream().map(d -> new Rstr(null,
+                    d.getAccRstr(),
                     d.getAccRstrDate())).forEach(list::add);
         }
 
         return list;
+    }
+
+    private void setEntryForRstrs(Entry entry, List<Rstr> rstrs){
+        rstrs.forEach(r -> r.setEntry(entry));
     }
 }

@@ -42,12 +42,13 @@ public class Entry extends Audit {
     @Embedded
     @Column(nullable = false)
     private Participant participant;
+
     @JsonIgnore
     @ToString.Exclude
     @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<SWBIC> swbics;
-    @JsonIgnore
 
+    @JsonIgnore
     @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     private List<Account> accounts;
 

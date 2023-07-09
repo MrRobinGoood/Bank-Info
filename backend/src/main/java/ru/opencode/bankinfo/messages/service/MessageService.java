@@ -13,11 +13,10 @@ import ru.opencode.bankinfo.messages.entity.Account;
 import ru.opencode.bankinfo.messages.entity.EMessageEntity;
 import ru.opencode.bankinfo.messages.entity.Entry;
 import ru.opencode.bankinfo.messages.entity.SWBIC;
+import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
+import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
 import ru.opencode.bankinfo.messages.mapper.MessageMapper;
-import ru.opencode.bankinfo.messages.repository.AccountRepository;
-import ru.opencode.bankinfo.messages.repository.EntryRepository;
-import ru.opencode.bankinfo.messages.repository.MessageRepository;
-import ru.opencode.bankinfo.messages.repository.SWBICSRepository;
+import ru.opencode.bankinfo.messages.repository.*;
 import ru.opencode.bankinfo.parser.XmlToPOJO;
 
 import javax.xml.bind.JAXBException;
@@ -43,6 +42,12 @@ public class MessageService {
     @Autowired
     private SWBICSRepository swbicsRepo;
 
+    @Autowired
+    private RstrRepository rstrRepo;
+
+    @Autowired
+    private AccRstrRepository accRstrRepo;
+
     private final MessageMapper mapper = new MessageMapper();
 
     public EMessageEntity getMessageById(Long id) {
@@ -65,16 +70,30 @@ public class MessageService {
 
             List<Account> accounts = new ArrayList<>();
             List<SWBIC> swbics = new ArrayList<>();
+            List<Rstr> rstrs = new ArrayList<>();
+            List<AccRstr> accRstrs = new ArrayList<>();
             for (Entry entry : entries) {
                 if (entry.getAccounts() != null) {
                     accounts.addAll(entry.getAccounts());
+                    for(Account account: entry.getAccounts()) {
+                        if(account.getAccRstrList() != null &&
+                                !account.getAccRstrList().isEmpty()) {
+                            accRstrs.addAll(account.getAccRstrList());
+                        }
+                    }
                 }
                 if (entry.getSwbics() != null) {
                     swbics.addAll(entry.getSwbics());
                 }
+                if(entry.getParticipant().getRstrList() != null &&
+                        !entry.getParticipant().getRstrList().isEmpty()) {
+                    rstrs.addAll(entry.getParticipant().getRstrList());
+                }
             }
             accountRepo.saveAll(accounts);
             swbicsRepo.saveAll(swbics);
+            rstrRepo.saveAll(rstrs);
+            accRstrRepo.saveAll(accRstrs);
 
             fillMessage(entries, message);
             messageRepo.save(message);
@@ -124,7 +143,7 @@ public class MessageService {
 
         entriesDTO.stream().map(d -> mapper.DTOToEntry(d, message.getId())).forEach(entries::add);
 
-        return entries;
+            return entries;
     }
 
     private void fillMessage(List<Entry> entries, EMessageEntity message) {

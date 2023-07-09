@@ -4,12 +4,12 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
-import ru.opencode.bankinfo.messages.entity.subClass.RstrList;
+import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
 
 import ru.opencode.bankinfo.util.AuditP;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Embeddable
 @RequiredArgsConstructor
@@ -79,7 +79,9 @@ public class Participant extends AuditP {
     private String UID;
 
     private String participantStatus;
+
+    @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @Column(length = 500)
-    private RstrList rstrList;
+    private List<Rstr> rstrList;
 
 }
