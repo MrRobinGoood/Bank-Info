@@ -1,12 +1,13 @@
 package ru.opencode.bankinfo.messages.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ru.opencode.bankinfo.util.Audit;
 
-import java.util.Set;
+import java.util.List;
 
 @Entity
 @Table(name = "Entries"/*, schema = "main"*/)
@@ -25,6 +26,7 @@ public class Entry extends Audit {
 
     @NonNull
     @NotNull
+    @Column(nullable = false)
     private Long messageId;
 
     @NonNull
@@ -40,11 +42,13 @@ public class Entry extends Audit {
     @Embedded
     @Column(nullable = false)
     private Participant participant;
+    @JsonIgnore
+    @ToString.Exclude
+    @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    private List<SWBIC> swbics;
+    @JsonIgnore
 
     @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<SWBIC> swbics;
-
-    @OneToMany(mappedBy = "entry", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private Set<Account> accounts;
+    private List<Account> accounts;
 
 }

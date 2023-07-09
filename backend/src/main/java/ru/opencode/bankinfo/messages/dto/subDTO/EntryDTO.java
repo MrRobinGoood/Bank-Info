@@ -4,15 +4,10 @@ import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import ru.opencode.bankinfo.adapter.LocalDateAdapter;
-import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
 
 import javax.xml.bind.annotation.*;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @Data
 @NoArgsConstructor
@@ -39,17 +34,23 @@ public class EntryDTO {
 
     private Boolean isDeletedP = false;
 
-    @NonNull
+//    @NonNull
     private Long createdByP;
 
-    @NonNull
+//    @NonNull
     private LocalDateTime createDateTimeP;
 
     private Long changeByP;
 
     private LocalDateTime changeDateTimeP;
+
     @XmlElement(name = "SWBICS", namespace = "urn:cbr-ru:ed:v2.0")
-    private Set<SWBICDTO> swbics;
+    private List<SWBICDTO> swbics;
     @XmlElement(name = "Accounts", namespace = "urn:cbr-ru:ed:v2.0")
-    private Set<AccountDTO> accounts;
+
+    private List<AccountDTO> accounts;
+
+    @Embedded
+    private Audit auditFields;
+
 }

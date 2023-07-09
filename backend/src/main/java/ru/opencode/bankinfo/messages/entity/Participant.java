@@ -11,6 +11,7 @@ import java.time.LocalDateTime;
 
 @Embeddable
 @RequiredArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
@@ -76,19 +77,19 @@ public class Participant {
     private String UID;
 
     private String participantStatus;
-
+    @Column(length = 500)
     private RstrList rstrList;
 
     private Boolean isDeletedP = false;
 
-    @NonNull
-    @NotNull
-    @Column(nullable = false)
+//    @NonNull
+//    @NotNull
+//    @Column(nullable = false)
     private Long createdByP;
 
-    @NonNull
-    @NotNull
-    @Column(nullable = false)
+//    @NonNull
+//    @NotNull
+//    @Column(nullable = false)
     private LocalDateTime createDateTimeP;
 
     private Long changeByP;
