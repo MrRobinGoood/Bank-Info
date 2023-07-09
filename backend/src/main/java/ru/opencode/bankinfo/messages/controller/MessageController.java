@@ -73,9 +73,9 @@ public class MessageController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(value = "/xml")
-    public void createMessage(
+    public EMessageEntity createMessage(
             @RequestPart("file") MultipartFile file
             ) throws JAXBException, IOException, ParserConfigurationException, SAXException {
-        service.createMessageByXml(file);
+        return service.createMessageByXml(file);
     }
 }

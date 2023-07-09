@@ -72,7 +72,7 @@ public class MessageService {
     }
 
 
-    public void createMessage(MessageDTO dto) {
+    public EMessageEntity createMessage(MessageDTO dto) {
         try {
 
             EMessageEntity message = mapper.DTOToMessage(dto);
@@ -95,6 +95,7 @@ public class MessageService {
 
             fillMessage(entries, message);
             messageRepo.save(message);
+            return message;
         } catch (RuntimeException e) {
             System.out.println(e);
             throw new InvalidParametersException("Invalid parameters for creating message");
@@ -128,12 +129,12 @@ public class MessageService {
         return entriesId.stream().map(this::getEntry).toList();
     }
 
-    public void createMessageByXml(MultipartFile multifile) throws JAXBException, IOException, ParserConfigurationException, SAXException {
+    public EMessageEntity createMessageByXml(MultipartFile multifile) throws JAXBException, IOException, ParserConfigurationException, SAXException {
         File file = XmlToPOJO.convertMultipartFileToFile(multifile);
         Document document = XmlToPOJO.fileToDocument(file);
         MessageDTO dto = XmlToPOJO.xmlToPOJO(XmlToPOJO.documentToString(document));
         dto.setEMessageName(file.getName());
-        createMessage(dto);
+        return createMessage(dto);
     }
 
     private List<Entry> createEntriesForMessage(MessageDTO dto, EMessageEntity message) {
