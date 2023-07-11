@@ -28,7 +28,6 @@
 ### Общий функционал
 - Использован архитектурный подход Spring MVC.
 - Аудирование. При создании/изменении информации, сохраняются данные о дате и времени проведенных операций. 
-- *(в разработке)* Logger. Фиксация обрабатываемых запросов для отслеживания работы backend-сервиса.
 ### Сборник справочников
 - Возможность хранения, добавления, изменения справочной информации в форматах описанных в *"ОБМЕН С КЛИЕНТАМИ БАНКА РОССИИ.
 КОДОВЫЕ ЗНАЧЕНИЯ РЕКВИЗИТОВ ЭС"*
@@ -56,7 +55,19 @@ ____
 - Механизм ручного добавления xml-файлов. Возможность добавлять собственные xml-файлы соответсвующие формату электронных сообщений ЦБ РФ.
 - Интерфейс
 
-*(в разработке)*
+____
+Электронные сообщения:
+
+![Электронные сообщения](https://github.com/MrRobinGoood/Bank-Info/blob/master/backend/src/main/resources/readme-pictures/Screenshot_7.png)
+____
+Добавление информации:
+
+![Добавление информации](https://github.com/MrRobinGoood/Bank-Info/blob/master/backend/src/main/resources/readme-pictures/Screenshot_5.png)
+____
+Отображение содержимого электронного сообщения:
+
+![Добавление информации](https://github.com/MrRobinGoood/Bank-Info/blob/master/backend/src/main/resources/readme-pictures/Screenshot_6.png)
+____
 
 - Cхема базы данных для электронных сообщений
 ____
@@ -84,12 +95,12 @@ ____
 #### Документация OpenAPI 3.0
 Для нашего проекта доступна документация формата OpenAPI 3.0. [Ссылка на онлайн документацию](https://app.swaggerhub.com/apis/MROBINGOOOD/Bank-Info-OpenCode-Practice/0.0.3#/)
 
-Для локального просмотра документации склонируйте [openapi.yaml](...), а затем импортируйте его в [SwaggerEditor](https://editor.swagger.io/).
+Для локального просмотра документации склонируйте [openapi.yaml](https://github.com/MrRobinGoood/Bank-Info/blob/master/backend/src/main/resources/openapi.yaml), а затем импортируйте его в [SwaggerEditor](https://editor.swagger.io/).
 ____
 #### Запуск контейнеров Docker-Compose
 Вы можете воспользоваться созданными контейнерами docker:
 - Установите docker и docker-compose
-- Склонируйте файл [docker-compose.yml](...)
+- Склонируйте файл [docker-compose.yml](https://github.com/MrRobinGoood/Bank-Info/blob/master/backend/docker-compose/docker-compose.yml)
 - Запустите docker-compose файл(из командной строки находясь в той же директории что и файл) командой ```docker compose up -d```
 
 После этого у вас будут запущены оба контейнера client-server и вы сможете подключиться к ним по адресу ```http://localhost:3000/```
