@@ -186,7 +186,7 @@ public class MessageService {
         return createMessage(dto);
     }
     public Boolean isMessageWithDate(LocalDate date){
-        return messageRepo.existsByBusinessDayEquals(date);
+        return messageRepo.existsByBusinessDayEqualsAAndIsDeletedEquals(date, false);
     }
     public EMessageEntity addEMessageFromBank() throws JAXBException, IOException, ParserConfigurationException, SAXException{
         LocalDate localDate = LocalDate.now();

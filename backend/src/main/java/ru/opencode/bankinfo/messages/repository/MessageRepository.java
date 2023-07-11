@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface MessageRepository extends JpaRepository<EMessageEntity, Long> {
-    Boolean existsByBusinessDayEquals(LocalDate date);
+    Boolean existsByBusinessDayEqualsAAndIsDeletedEquals(LocalDate date, Boolean isDeleted);
     Page<EMessageEntity> findAllByeMessageNameContainsAndCreateDateTimeGreaterThanEqualAndCreateDateTimeLessThanEqualAndIsDeletedEquals(String eMessageName, LocalDateTime localDateTimeStart, LocalDateTime localDateTimeEnd,Boolean isDeleted, Pageable pageable);
 
 

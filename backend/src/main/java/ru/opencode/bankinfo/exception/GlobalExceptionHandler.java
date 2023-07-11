@@ -35,7 +35,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MessageConflictException.class)
     public ResponseEntity<?> handleMessageConflictException(MessageConflictException e) {
-        return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.CONFLICT);
+        return new ResponseEntity<>(new AppError(e.getMessage()), HttpStatus.OK);
     }
 
        @ExceptionHandler(MethodArgumentNotValidException.class)
