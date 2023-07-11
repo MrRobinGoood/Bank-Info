@@ -33,7 +33,7 @@ public class InfoService {
     }
 
     public List<Object> getAllInfo(String name, Boolean isDeleted, Integer pageNo, Integer pageSize) {
-        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by("name"));
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by("id"));
         Page<Info> infoPage = infoRepository.findByIsDeletedEqualsAndNameContains(isDeleted, name, pageable);
 
         List<Object> infoPageWithPaginateConfig = new ArrayList<>();

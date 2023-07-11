@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.manuals.dto;
+package ru.opencode.bankinfo.util;
 
 import lombok.*;
 

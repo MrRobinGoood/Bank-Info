@@ -6,8 +6,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
 
-import ru.opencode.bankinfo.util.AuditP;
-
 import java.time.LocalDate;
 import java.util.List;
 
@@ -18,7 +16,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @ToString
-public class Participant extends AuditP {
+public class Participant {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
     @EqualsAndHashCode.Include

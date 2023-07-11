@@ -1,6 +1,5 @@
 package ru.opencode.bankinfo.messages.dto.subDTO;
 
-import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

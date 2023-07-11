@@ -17,8 +17,6 @@ public class MessageMapper {
         message.setEMessageName(dto.getEMessageName());
         message.setEdReceiver(dto.getEdReceiver());
 
-//        message.setAuditFields(dto.getAuditFields());
-
         return message;
     };
 
@@ -41,7 +39,7 @@ public class MessageMapper {
         }
 
         entry.setChangeType(dto.getChangeType());
-        setEntryForRstrs(entry, entry.getParticipant().getRstrList());
+        setEntryForRstrs(entry, entry.getParticipantInfo().getRstrList());
 
         return entry;
     }

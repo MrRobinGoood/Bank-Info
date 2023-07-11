@@ -2,7 +2,7 @@ version: '3'
 
 services:
   client:
-    image: 'robingoood/open-code-frontend:1.2'
+    image: 'robingoood/open-code-frontend:2.0'
     container_name: 'client-frontend'
     ports:
       - '3000:3000'
@@ -12,7 +12,7 @@ services:
     stdin_open: true
     tty: true
   service:
-    image: 'robingoood/open-code-backend:1.7'
+    image: 'robingoood/open-code-backend:2.0'
     container_name: 'service-backend'
     ports:
       - '8081:8081'

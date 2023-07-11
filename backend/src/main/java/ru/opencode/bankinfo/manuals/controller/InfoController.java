@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.opencode.bankinfo.manuals.dto.InfoCreationDTO;
-import ru.opencode.bankinfo.manuals.dto.PaginatedResponseDTO;
+import ru.opencode.bankinfo.util.PaginatedResponseDTO;
 import ru.opencode.bankinfo.manuals.entity.Info;
 import ru.opencode.bankinfo.manuals.mapper.InfoMapper;
 import ru.opencode.bankinfo.manuals.service.InfoService;

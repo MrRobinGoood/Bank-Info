@@ -1,7 +1,6 @@
 package ru.opencode.bankinfo.util;
 
 
-import jakarta.persistence.Embeddable;
 import jakarta.persistence.EntityListeners;
 import jakarta.persistence.MappedSuperclass;
 import lombok.Data;

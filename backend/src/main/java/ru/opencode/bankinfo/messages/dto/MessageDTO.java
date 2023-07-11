@@ -1,6 +1,5 @@
 package ru.opencode.bankinfo.messages.dto;
 
-import jakarta.persistence.Embedded;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -79,8 +78,5 @@ public class MessageDTO {
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     @XmlAttribute(name = "BusinessDay")
     private LocalDate businessDay;
-
-
-//    private EntryDTO bicDirectoryEntries;
 
 }
