@@ -5,11 +5,13 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 import ru.opencode.bankinfo.config.PaginationConfig;
+
 import ru.opencode.bankinfo.exception.InvalidParametersException;
 import ru.opencode.bankinfo.exception.NotFoundException;
 import ru.opencode.bankinfo.messages.dto.MessageDTO;
@@ -21,6 +23,7 @@ import ru.opencode.bankinfo.messages.entity.Entry;
 import ru.opencode.bankinfo.messages.entity.SWBIC;
 import ru.opencode.bankinfo.messages.entity.subClass.AccRstr;
 import ru.opencode.bankinfo.messages.entity.subClass.Rstr;
+import ru.opencode.bankinfo.messages.exception.MessageConflictException;
 import ru.opencode.bankinfo.messages.mapper.MessageMapper;
 import ru.opencode.bankinfo.messages.repository.*;
 import ru.opencode.bankinfo.parser.XmlToPOJO;
@@ -182,12 +185,18 @@ public class MessageService {
         XmlToPOJO.deleteFile(path);
         return createMessage(dto);
     }
-
+    public Boolean isMessageWithDate(LocalDate date){
+        return messageRepo.existsByBusinessDayEquals(date);
+    }
     public EMessageEntity addEMessageFromBank() throws JAXBException, IOException, ParserConfigurationException, SAXException{
         LocalDate localDate = LocalDate.now();
         XmlToPOJO.downoloadXML(localDate);
-
         Path path = Path.of(String.format("backend/src/main/resources/%s_ED807_full.xml", XmlToPOJO.getFormattedDate(localDate)));
+
+        if (isMessageWithDate(localDate)){
+            XmlToPOJO.deleteFile(path);
+            throw new MessageConflictException("Message from Bank is actual, and updated today!");
+        }
         Document document = XmlToPOJO.getDocument(path.toString());
 
         return createEMessageByDocument(document,path);
