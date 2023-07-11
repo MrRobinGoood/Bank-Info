@@ -45,6 +45,7 @@ public class XmlToPOJO {
 
         return builder.parse(new File(path));
     }
+
     public static Document fileToDocument(File file) throws IOException, SAXException, ParserConfigurationException {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 
@@ -58,6 +59,7 @@ public class XmlToPOJO {
         FileCopyUtils.copy(multipartFile.getBytes(), file);
         return file;
     }
+
     public static String documentToString(Document doc) {
         try {
             StringWriter sw = new StringWriter();
@@ -75,10 +77,12 @@ public class XmlToPOJO {
         }
     }
 
-    public void deleteFile(LocalDate date) throws IOException {
+    public static String getFormattedDate(LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        String formattedString = date.format(formatter);
-        Path path = Path.of(String.format("backend/src/main/resources/%s_ED807_full.xml", formattedString));
+        return date.format(formatter);
+    }
+
+    public static void deleteFile(Path path) throws IOException {
         Files.delete(path);
     }
 
@@ -96,10 +100,8 @@ public class XmlToPOJO {
     }
 
     public static void downoloadXML(LocalDate date) throws IOException {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        String formattedString = date.format(formatter);
-        URL url = new URL(String.format("http://cbr.ru/vfs/mcirabis/BIKNew/%sED01OSBR.zip", formattedString));
-        Path path = Path.of("backend/src/main/resources");
+        URL url = new URL(String.format("http://cbr.ru/vfs/mcirabis/BIKNew/%sED01OSBR.zip", getFormattedDate(date)));
+        Path path = Path.of("backend/src/main/resources/xmls");
         unzip(url, path);
     }
 

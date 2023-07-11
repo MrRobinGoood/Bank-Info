@@ -79,6 +79,12 @@ public class MessageController {
     public EMessageEntity createMessage(
             @RequestPart("file") MultipartFile file
     ) throws JAXBException, IOException, ParserConfigurationException, SAXException {
-        return service.createMessageByXml(file);
+        return service.createEMessageByXml(file);
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping
+    public EMessageEntity createEMessageFromBank() throws JAXBException, IOException, ParserConfigurationException, SAXException {
+        return service.addEMessageFromBank();
     }
 }

@@ -29,7 +29,11 @@ import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -169,12 +173,29 @@ public class MessageService {
         return entryPageWithPaginateConfig;
     }
 
-    public EMessageEntity createMessageByXml(MultipartFile multifile) throws JAXBException, IOException, ParserConfigurationException, SAXException {
+    public EMessageEntity createEMessageByXml(MultipartFile multifile) throws JAXBException, IOException, ParserConfigurationException, SAXException {
         File file = XmlToPOJO.convertMultipartFileToFile(multifile);
-        Document document = XmlToPOJO.fileToDocument(file);
+        return createEMessageByDocument(XmlToPOJO.fileToDocument(file), Path.of(file.getPath())) ;
+    }
+
+    public EMessageEntity createEMessageByDocument(Document document, Path path) throws JAXBException, IOException, ParserConfigurationException, SAXException {
         MessageDTO dto = XmlToPOJO.xmlToPOJO(XmlToPOJO.documentToString(document));
-        dto.setEMessageName(file.getName());
+        dto.setEMessageName(path.getFileName().toString());
+        XmlToPOJO.deleteFile(path);
         return createMessage(dto);
+    }
+
+    public EMessageEntity addEMessageFromBank() throws JAXBException, IOException, ParserConfigurationException, SAXException{
+        LocalDate localDate = LocalDate.now();
+        XmlToPOJO.downoloadXML(localDate);
+
+        Path path = Path.of(String.format("backend/src/main/resources/xmls/%s_ED807_full.xml", XmlToPOJO.getFormattedDate(localDate)));
+
+
+        Document document = XmlToPOJO.getDocument(path.toString());
+
+        return createEMessageByDocument(document,path);
+
     }
 
     private List<Entry> createEntriesForMessage(MessageDTO dto, EMessageEntity message) {
