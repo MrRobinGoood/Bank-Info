@@ -8,7 +8,7 @@ import lombok.*;
 import ru.opencode.bankinfo.util.Audit;
 
 @Entity
-@Table(name = "SWBICS"/*, schema = "main"*/)
+@Table(name = "SWBICS")
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Getter

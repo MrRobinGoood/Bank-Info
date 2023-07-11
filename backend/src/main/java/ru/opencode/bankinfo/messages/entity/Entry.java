@@ -9,7 +9,7 @@ import ru.opencode.bankinfo.util.Audit;
 import java.util.List;
 
 @Entity
-@Table(name = "Entries"/*, schema = "main"*/)
+@Table(name = "Entries")
 @RequiredArgsConstructor
 @NoArgsConstructor
 @Getter

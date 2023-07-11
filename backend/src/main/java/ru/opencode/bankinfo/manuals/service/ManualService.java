@@ -40,7 +40,6 @@ public class ManualService {
         return manualRepository.findAll();
     }
 
-    //TODO pageNo/pageSize must be greater than zero
     public List<Object> getManualsByInfoId(Long infoId, Boolean isDeleted, String code, String description, Integer pageNo, Integer pageSize) {
         infoService.getInfo(infoId);
         Pageable pageable = PageRequest.of(pageNo - 1, pageSize, Sort.by("id"));

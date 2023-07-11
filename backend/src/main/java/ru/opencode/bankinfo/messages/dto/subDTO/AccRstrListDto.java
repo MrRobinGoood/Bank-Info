@@ -1,11 +1,9 @@
 package ru.opencode.bankinfo.messages.dto.subDTO;
 
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
 import ru.opencode.bankinfo.adapter.LocalDateAdapter;
 
 import javax.xml.bind.annotation.XmlAccessType;

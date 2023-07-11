@@ -31,8 +31,8 @@ public class MessageController {
     public PaginatedResponseDTO getManualsByInfoId(@RequestParam(defaultValue = "1", name = "page") Integer pageNo,
                                                    @RequestParam(defaultValue = "10", name = "size") Integer pageSize,
                                                    @RequestParam(defaultValue = "", name = "emessage_name") String messageName,
-                                                   @RequestParam(defaultValue = "-99999999-01-01T00:00:00", name = "date_start") LocalDateTime localDateTimeStart,
-                                                   @RequestParam(defaultValue = "+99999999-12-31T23:59:59.999999999", name = "date_end") LocalDateTime localDateTimeEnd,
+                                                   @RequestParam(defaultValue = "-99999999-01-01T00:00:00", name = "date_start")LocalDateTime localDateTimeStart,
+                                                   @RequestParam(defaultValue = "+99999999-12-31T23:59:59.999999999", name = "date_end")LocalDateTime localDateTimeEnd,
                                                    @RequestParam(defaultValue = "false", name = "deleted") Boolean isDeleted) {
 
         List<Object> eMessagePageWithPaginateConfig = service.getMessages(messageName, localDateTimeStart, localDateTimeEnd, isDeleted, pageNo, pageSize);

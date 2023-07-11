@@ -7,7 +7,6 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import ru.opencode.bankinfo.messages.entity.Entry;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
 @Entity

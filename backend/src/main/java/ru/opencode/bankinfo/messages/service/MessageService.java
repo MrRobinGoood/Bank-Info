@@ -29,11 +29,9 @@ import javax.xml.bind.JAXBException;
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -189,9 +187,7 @@ public class MessageService {
         LocalDate localDate = LocalDate.now();
         XmlToPOJO.downoloadXML(localDate);
 
-        Path path = Path.of(String.format("backend/src/main/resources/xmls/%s_ED807_full.xml", XmlToPOJO.getFormattedDate(localDate)));
-
-
+        Path path = Path.of(String.format("backend/src/main/resources/%s_ED807_full.xml", XmlToPOJO.getFormattedDate(localDate)));
         Document document = XmlToPOJO.getDocument(path.toString());
 
         return createEMessageByDocument(document,path);

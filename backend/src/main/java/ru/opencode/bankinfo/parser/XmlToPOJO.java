@@ -22,7 +22,6 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -101,7 +100,7 @@ public class XmlToPOJO {
 
     public static void downoloadXML(LocalDate date) throws IOException {
         URL url = new URL(String.format("http://cbr.ru/vfs/mcirabis/BIKNew/%sED01OSBR.zip", getFormattedDate(date)));
-        Path path = Path.of("backend/src/main/resources/xmls");
+        Path path = Path.of("backend/src/main/resources");
         unzip(url, path);
     }
 

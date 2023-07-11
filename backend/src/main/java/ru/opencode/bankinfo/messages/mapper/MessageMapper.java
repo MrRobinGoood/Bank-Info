@@ -17,8 +17,6 @@ public class MessageMapper {
         message.setEMessageName(dto.getEMessageName());
         message.setEdReceiver(dto.getEdReceiver());
 
-//        message.setAuditFields(dto.getAuditFields());
-
         return message;
     };
 
