@@ -1,4 +1,4 @@
-package ru.opencode.bankinfo.manuals.exception;
+package ru.opencode.bankinfo.exception;
 
 public class AppError {
     String message;

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ru.opencode.bankinfo.manuals.dto.InfoCreationDTO;
-import ru.opencode.bankinfo.manuals.dto.PaginatedResponseDTO;
+import ru.opencode.bankinfo.util.PaginatedResponseDTO;
 import ru.opencode.bankinfo.manuals.entity.Info;
 import ru.opencode.bankinfo.manuals.mapper.InfoMapper;
 import ru.opencode.bankinfo.manuals.service.InfoService;
@@ -39,9 +39,9 @@ public class InfoController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public void createInfo(@Valid @RequestBody InfoCreationDTO infoCreationDTO) {
+    public Long createInfo(@Valid @RequestBody InfoCreationDTO infoCreationDTO) {
         Info info = infoMapper.infoCreationDTOToInfo(infoCreationDTO);
-        infoService.createInfo(info);
+        return infoService.createInfo(info);
     }
 
     @PutMapping(value = "/{id}")
@@ -54,5 +54,11 @@ public class InfoController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteInfo(@PathVariable(value = "id") Long id) {
         infoService.deleteInfo(id);
+    }
+
+    @PatchMapping(value = "/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void restoreInfo(@PathVariable(value = "id") Long id) {
+        infoService.restoreInfo(id);
     }
 }
